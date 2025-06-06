@@ -1,0 +1,37 @@
+$input-bg: #f0f0f0;
+$input-color: #333;
+$input-placeholder: #aaa;
+$label-color: #000;
+$border-radius: 10px;
+
+.custom-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+
+  .custom-input-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: $label-color;
+  }
+
+  .custom-input-field {
+    padding: 12px;
+    border-radius: $border-radius;
+    border: none;
+    background-color: $input-bg;
+    font-size: 16px;
+    color: $input-color;
+    outline: none;
+    transition: box-shadow 0.2s;
+
+    &::placeholder {
+      color: $input-placeholder;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

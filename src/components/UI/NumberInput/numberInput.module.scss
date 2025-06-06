@@ -1,0 +1,19 @@
+.number-input {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+
+  &__cell {
+    width: 40px;
+    height: 48px;
+    font-size: 24px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    &:focus {
+      outline: 2px solid #007bff;
+    }
+  }
+}
