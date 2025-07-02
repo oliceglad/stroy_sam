@@ -4,7 +4,7 @@ import EmptyCart from "../components/EmptyCart/EmptyCart";
 import s from "../assets/images/1.png";
 import InfoCart from "../components/InfoCart/InfoCart";
 
-const Cart = () => {
+const CartPage = () => {
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -67,4 +67,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartPage;

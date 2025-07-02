@@ -45,13 +45,14 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  border: 1px solid rgb(190, 189, 189);
+  border-radius: 5px;
 }
 
 .cardCart__quantityButton {
-  background-color: #f1f1f1;
-  border: 1px solid #ddd;
   padding: 8px;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .cardCart__quantityButton:disabled {
