@@ -61,7 +61,18 @@
 }
 
 .cart {
-  width: 400px;
-  height: 600px;
-  margin: 40px auto;
+  min-height: 600px;
+  padding: 20px;
+
+  &__title {
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
 }
