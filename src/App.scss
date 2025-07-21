@@ -142,3 +142,12 @@
     line-height: 1.5;
   }
 }
+
+.categories {
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,42 @@
+.categoriesCard {
+  &__img {
+    width: 150px;
+    height: 150px;
+    border-radius: 150px;
+    object-fit: cover;
+    border: 1px solid black;
+    cursor: pointer;
+
+    &:hover {
+      & ~ .categoriesCard__title {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__title {
+    max-width: 150px;
+    line-height: 1.25;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__sublist {
+    &__item {
+      cursor: pointer;
+      font-size: 15px;
+      margin-bottom: 5px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

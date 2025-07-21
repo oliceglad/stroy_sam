@@ -10,6 +10,7 @@ import DeliveryPage from "./pages/DeliveryPage";
 import SuccessPage from "./pages/SuccessPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
+import CategoryDetailsPage from "./pages/CategoryDetailsPage";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
             <Route path="/delivery" element={<DeliveryPage />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/categories" element={<CategoriesPage />} />
+            <Route
+              path="/categories/:categoryId/*"
+              element={<CategoryDetailsPage />}
+            />
           </Routes>
         </div>
         <Footer />

@@ -1,7 +1,10 @@
-// components/Breadcrumbs.jsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./Breadcrumbs.module.scss";
+import {
+  useGetMainCategoriesQuery,
+  useGetSubcategoriesQuery,
+} from "../../api/categories";
 
 const pathNameMap = {
   "": "Главная",
@@ -16,28 +19,53 @@ const pathNameMap = {
 
 const Breadcrumbs = () => {
   const location = useLocation();
+  const { data: mainCategories } = useGetMainCategoriesQuery();
+
   const pathnames = location.pathname.split("/").filter(Boolean);
 
-  const crumbs = pathnames.map((segment, index) => {
-    const routeTo = "/" + pathnames.slice(0, index + 1).join("/");
-    const name = pathNameMap[segment] || decodeURIComponent(segment);
-    return (
-      <span key={routeTo}>
-        <Link to={routeTo}>{name}</Link>
-        {index < pathnames.length - 1 && (
-          <span className={styles.separator}>›</span>
-        )}
-      </span>
-    );
+  const categoryId = pathnames[1];     // categories/:id
+  const subcategoryId = pathnames[2];  // categories/:id/:subId
+
+  const { data: subcategories } = useGetSubcategoriesQuery(categoryId, {
+    skip: !categoryId,
   });
 
-  return (
-    <div className={styles.breadcrumbs}>
-      <Link to="/" className={styles.breadcrumbs__title}>Главная</Link>
-      {crumbs.length > 0 && <span className={styles.separator}>›</span>}
-      {crumbs}
-    </div>
-  );
+  // Получаем названия
+  const categoryName =
+    mainCategories?.find((c) => String(c.id) === categoryId)?.category_name;
+
+  const subcategoryName =
+    subcategories?.find((c) => String(c.id) === subcategoryId)?.category_name;
+
+  // Сборка крошек
+  const crumbs = [
+    <Link to="/" key="home" className={styles.breadcrumbs__title}>
+      Главная
+    </Link>,
+  ];
+
+  if (pathnames.includes("categories")) {
+    crumbs.push(
+      <span key="sep1" className={styles.separator}>›</span>,
+      <Link to="/categories" key="categories">Все категории</Link>
+    );
+  }
+
+  if (categoryId && categoryName) {
+    crumbs.push(
+      <span key="sep2" className={styles.separator}>›</span>,
+      <Link to={`/categories/${categoryId}`} key="main-cat">{categoryName}</Link>
+    );
+  }
+
+  if (subcategoryId && subcategoryName) {
+    crumbs.push(
+      <span key="sep3" className={styles.separator}>›</span>,
+      <span key="sub-cat">{subcategoryName}</span>
+    );
+  }
+
+  return <div className={styles.breadcrumbs}>{crumbs}</div>;
 };
 
 export default Breadcrumbs;

@@ -13,11 +13,12 @@ const CategoriesPage = () => {
   if (error) return <p>Ошибка загрузки</p>;
 
   return (
-    <div>
-      <h1>Категории</h1>
-      {mainCategories.map((category) => (
-        <CategoryCard key={category.id} category={category} />
-      ))}
+    <div className="categories">
+      <ul className="categories__list">
+        {mainCategories.map((category) => (
+          <CategoryCard key={category.id} category={category} />
+        ))}
+      </ul>
     </div>
   );
 };
