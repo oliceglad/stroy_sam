@@ -1,17 +1,23 @@
 .footer {
   background-color: #1a1a1a;
   color: #fff;
-  padding: 40px 20px;
 
   &__container {
     display: flex;
+    padding: 10px 20px;
     justify-content: space-between;
-    margin-bottom: 40px;
+    align-items: flex-end;
   }
 
   &__section {
     flex: 1;
     margin-right: 20px;
+
+    & h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
 
     &:last-child {
       margin-right: 0;
@@ -24,11 +30,13 @@
     }
 
     &__list {
+      display: flex;
       list-style-type: none;
       padding: 0;
 
       &__item {
-        margin-bottom: 10px;
+        font-size: 16px;
+        margin-right: 10px;
       }
     }
   }
@@ -77,8 +85,12 @@
   }
 
   &__bottom {
+    display: flex;
     text-align: center;
-    margin-top: 40px;
+
+    & a:not(:last-child) {
+      margin-right: 10px;
+    }
   }
 
   &__privacyPolicy,

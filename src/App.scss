@@ -1,6 +1,5 @@
 .auth {
   width: 400px;
-  height: 600px;
   margin: 40px auto;
   &__title {
     font-size: 30px;
@@ -11,7 +10,6 @@
 
 .verification {
   width: 400px;
-  height: 600px;
   margin: 40px auto;
   text-align: center;
 
@@ -72,7 +70,7 @@
 
   &__container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-start;
   }
 }

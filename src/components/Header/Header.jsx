@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header className={s.header}>
       <div className={s.header__left}>
-        <NavLink to="/catalog" className={s.header__link}>
+        <NavLink to="/categories" className={s.header__link}>
           <svg
             width="27"
             height="20"
@@ -76,7 +76,7 @@ const Header = () => {
             className={s.header__search}
             placeholder="Поиск..."
             value={searchValue}
-            onChange={handleSearchChange} // Используем обновленную функцию
+            onChange={handleSearchChange}
             onFocus={() => {
               if (searchValue.length >= 2) {
                 setShowDropdown(true);

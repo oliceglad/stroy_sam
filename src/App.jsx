@@ -8,12 +8,15 @@ import Footer from "./components/Footer/Footer";
 import CartPage from "./pages/CartPage";
 import DeliveryPage from "./pages/DeliveryPage";
 import SuccessPage from "./pages/SuccessPage";
+import CategoriesPage from "./pages/CategoriesPage";
+import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
+        <Breadcrumbs />
         <div className="main-content">
           <Routes>
             <Route path="/login" element={<LoginPage />} />
@@ -23,6 +26,7 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
             <Route path="/delivery" element={<DeliveryPage />} />
             <Route path="/success" element={<SuccessPage />} />
+            <Route path="/categories" element={<CategoriesPage />} />
           </Routes>
         </div>
         <Footer />

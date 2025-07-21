@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Input from "../components/UI/Input/input";
-import InfoCart from "../components/InfoCart/InfoCart";
+import InfoCart from "../components/Cart/InfoCart/InfoCart";
 
 const DeliveryPage = ({ cartItems }) => {
   const [formData, setFormData] = useState({

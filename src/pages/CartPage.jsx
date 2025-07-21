@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CardCart from "../components/CardCart/CardCart";
-import EmptyCart from "../components/EmptyCart/EmptyCart";
 import s from "../assets/images/1.png";
-import InfoCart from "../components/InfoCart/InfoCart";
+import EmptyCart from "../components/Cart/EmptyCart/EmptyCart";
+import CardCart from "../components/Cart/CardCart/CardCart";
+import InfoCart from "../components/Cart/InfoCart/InfoCart";
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState([

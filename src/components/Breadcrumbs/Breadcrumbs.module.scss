@@ -1,0 +1,25 @@
+// components/Breadcrumbs.module.scss
+.breadcrumbs {
+  padding: 12px 24px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #333;
+
+  a {
+    color: black;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+}
+
+.separator {
+  margin: 0 8px;
+  color: #888;
+}
