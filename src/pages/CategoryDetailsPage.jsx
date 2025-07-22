@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetSubcategoriesQuery } from "../api/categories";
 import { Link } from "react-router-dom";
+import { Loader } from "../components/UI/Loader/Loader";
 
 const CategoryDetailsPage = () => {
   const { categoryId } = useParams();
@@ -11,7 +12,12 @@ const CategoryDetailsPage = () => {
     error,
   } = useGetSubcategoriesQuery(categoryId);
 
-  if (isLoading) return <p>Загрузка...</p>;
+  if (isLoading)
+    return (
+      <div style={{textAlign: "center"}}>
+        <Loader />
+      </div>
+    );
   if (error) return <p>Ошибка загрузки подкатегорий</p>;
 
   return (

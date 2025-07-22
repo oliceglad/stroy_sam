@@ -18,12 +18,12 @@ export const CategoryCard = ({ category }) => {
           alt={category.category_name}
           style={{ objectFit: "cover" }}
           className={styles.categoriesCard__img}
-          onClick={() => navigate(`/categories/${category.id}`)}
+          onClick={() => navigate(`/categories/${category.id}/products`)}
         />
       )}
       <h2
         className={styles.categoriesCard__title}
-        onClick={() => navigate(`/categories/${category.id}`)}
+        onClick={() => navigate(`/categories/${category.id}/products`)}
       >
         {category.category_name}
       </h2>
@@ -33,7 +33,7 @@ export const CategoryCard = ({ category }) => {
             <li
               key={sub.id}
               className={styles.categoriesCard__sublist__item}
-              onClick={() => navigate(`/categories/${category.id}/${sub.id}`)}
+              onClick={() => navigate(`/categories/${category.id}/${sub.id}/products/`)}
             >
               {sub.category_name}
             </li>

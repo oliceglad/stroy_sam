@@ -1,0 +1,27 @@
+.wrapper {
+  margin-bottom: 24px;
+}
+
+.label {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item {
+  padding: 6px 12px;
+  background: #eee;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &.active {
+    background: black;
+    color: white;
+  }
+}

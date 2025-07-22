@@ -23,19 +23,21 @@ const Breadcrumbs = () => {
 
   const pathnames = location.pathname.split("/").filter(Boolean);
 
-  const categoryId = pathnames[1];     // categories/:id
-  const subcategoryId = pathnames[2];  // categories/:id/:subId
+  const categoryId = pathnames[1];
+  const subcategoryId = pathnames[2];
 
   const { data: subcategories } = useGetSubcategoriesQuery(categoryId, {
     skip: !categoryId,
   });
 
   // Получаем названия
-  const categoryName =
-    mainCategories?.find((c) => String(c.id) === categoryId)?.category_name;
+  const categoryName = mainCategories?.find(
+    (c) => String(c.id) === categoryId
+  )?.category_name;
 
-  const subcategoryName =
-    subcategories?.find((c) => String(c.id) === subcategoryId)?.category_name;
+  const subcategoryName = subcategories?.find(
+    (c) => String(c.id) === subcategoryId
+  )?.category_name;
 
   // Сборка крошек
   const crumbs = [
@@ -46,21 +48,42 @@ const Breadcrumbs = () => {
 
   if (pathnames.includes("categories")) {
     crumbs.push(
-      <span key="sep1" className={styles.separator}>›</span>,
-      <Link to="/categories" key="categories">Все категории</Link>
+      <span key="sep1" className={styles.separator}>
+        ›
+      </span>,
+      <Link to="/categories" key="categories">
+        Все категории
+      </Link>
+    );
+  }
+
+  if (pathnames.includes("cart")) {
+    crumbs.push(
+      <span key="sep1" className={styles.separator}>
+        ›
+      </span>,
+      <Link to="/cart" key="cart">
+        Корзина
+      </Link>
     );
   }
 
   if (categoryId && categoryName) {
     crumbs.push(
-      <span key="sep2" className={styles.separator}>›</span>,
-      <Link to={`/categories/${categoryId}`} key="main-cat">{categoryName}</Link>
+      <span key="sep2" className={styles.separator}>
+        ›
+      </span>,
+      <Link to={`/categories/${categoryId}/products`} key="main-cat">
+        {categoryName}
+      </Link>
     );
   }
 
   if (subcategoryId && subcategoryName) {
     crumbs.push(
-      <span key="sep3" className={styles.separator}>›</span>,
+      <span key="sep3" className={styles.separator}>
+        ›
+      </span>,
       <span key="sub-cat">{subcategoryName}</span>
     );
   }

@@ -144,10 +144,25 @@
 }
 
 .categories {
-
   &__list {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
   }
+}
+
+.page {
+
+  &__notfound {
+    text-align: center;
+    color: grey;
+  }
+
+
+  &__products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
 }
