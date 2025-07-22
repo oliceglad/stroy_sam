@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useGetMainCategoriesQuery } from "../api/categories";
 import { CategoryCard } from "../components/Categories/CategoriesCard";
+import { Loader } from "../components/UI/Loader/Loader";
 
 const CategoriesPage = () => {
   const {
@@ -9,7 +10,12 @@ const CategoriesPage = () => {
     isLoading,
   } = useGetMainCategoriesQuery();
 
-  if (isLoading) return <p>Загрузка категорий...</p>;
+  if (isLoading)
+    return (
+      <div style={{textAlign: "center"}}>
+        <Loader />
+      </div>
+    );
   if (error) return <p>Ошибка загрузки</p>;
 
   return (
