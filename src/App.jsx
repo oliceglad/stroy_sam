@@ -10,8 +10,8 @@ import DeliveryPage from "./pages/DeliveryPage";
 import SuccessPage from "./pages/SuccessPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
-import CategoryDetailsPage from "./pages/CategoryDetailsPage";
 import CategoryProductsPage from "./pages/CategoryProductsPage";
+import ProductPage from "./pages/ProductPage";
 
 function App() {
   return (
@@ -36,6 +36,14 @@ function App() {
             <Route
               path="/categories/:categoryId/:subId/products"
               element={<CategoryProductsPage />}
+            />
+            <Route
+              path="/categories/:categoryId/products/:productId"
+              element={<ProductPage />}
+            />
+            <Route
+              path="/categories/:categoryId/:subId/products/:productId"
+              element={<ProductPage />}
             />
           </Routes>
         </div>

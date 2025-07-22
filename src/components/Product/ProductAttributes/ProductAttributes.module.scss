@@ -1,0 +1,29 @@
+// ProductAttributes.module.scss
+.attrs {
+  margin-top: 32px;
+
+  &__title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+
+      span {
+        color: #666;
+      }
+
+      strong {
+        color: #222;
+      }
+    }
+  }
+}

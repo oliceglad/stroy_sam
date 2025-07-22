@@ -1,0 +1,36 @@
+.slider {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+
+  &__main img {
+    width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+  }
+
+  &__thumbnails {
+    display: flex;
+    gap: 8px;
+
+    img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border: 2px solid transparent;
+      cursor: pointer;
+      border-radius: 4px;
+
+      &:hover {
+        border-color: #999;
+      }
+    }
+
+    .active {
+      border-color: #007bff;
+    }
+  }
+}

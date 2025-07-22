@@ -5,17 +5,7 @@ import {
   useGetMainCategoriesQuery,
   useGetSubcategoriesQuery,
 } from "../../api/categories";
-
-const pathNameMap = {
-  "": "Главная",
-  categories: "Все категории",
-  cart: "Корзина",
-  delivery: "Доставка",
-  success: "Заказ оформлен",
-  login: "Авторизация",
-  register: "Регистрация",
-  verification: "Подтверждение",
-};
+import { useGetProductByIdQuery } from "../../api/products";
 
 const Breadcrumbs = () => {
   const location = useLocation();
@@ -24,13 +14,19 @@ const Breadcrumbs = () => {
   const pathnames = location.pathname.split("/").filter(Boolean);
 
   const categoryId = pathnames[1];
-  const subcategoryId = pathnames[2];
+  const subcategoryId = pathnames[2] === "products" ? null : pathnames[2];
+  const productId = pathnames.includes("products")
+    ? pathnames[pathnames.indexOf("products") + 1]
+    : null;
 
   const { data: subcategories } = useGetSubcategoriesQuery(categoryId, {
     skip: !categoryId,
   });
 
-  // Получаем названия
+  const { data: product } = useGetProductByIdQuery(productId, {
+    skip: !productId,
+  });
+
   const categoryName = mainCategories?.find(
     (c) => String(c.id) === categoryId
   )?.category_name;
@@ -39,7 +35,6 @@ const Breadcrumbs = () => {
     (c) => String(c.id) === subcategoryId
   )?.category_name;
 
-  // Сборка крошек
   const crumbs = [
     <Link to="/" key="home" className={styles.breadcrumbs__title}>
       Главная
@@ -53,17 +48,6 @@ const Breadcrumbs = () => {
       </span>,
       <Link to="/categories" key="categories">
         Все категории
-      </Link>
-    );
-  }
-
-  if (pathnames.includes("cart")) {
-    crumbs.push(
-      <span key="sep1" className={styles.separator}>
-        ›
-      </span>,
-      <Link to="/cart" key="cart">
-        Корзина
       </Link>
     );
   }
@@ -84,7 +68,21 @@ const Breadcrumbs = () => {
       <span key="sep3" className={styles.separator}>
         ›
       </span>,
-      <span key="sub-cat">{subcategoryName}</span>
+      <Link
+        to={`/categories/${categoryId}/${subcategoryId}/products`}
+        key="sub-cat"
+      >
+        {subcategoryName}
+      </Link>
+    );
+  }
+
+  if (productId && product?.product_name) {
+    crumbs.push(
+      <span key="sep4" className={styles.separator}>
+        ›
+      </span>,
+      <span key="product">{product.product_name}</span>
     );
   }
 

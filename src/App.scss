@@ -152,17 +152,23 @@
 }
 
 .page {
-
   &__notfound {
     text-align: center;
     color: grey;
   }
-
 
   &__products {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
   }
+}
 
+.product {
+
+  &__content {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
 }
