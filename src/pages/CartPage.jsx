@@ -1,52 +1,73 @@
-import React, { useState } from "react";
+import React from "react";
 import s from "../assets/images/1.png";
 import EmptyCart from "../components/Cart/EmptyCart/EmptyCart";
 import CardCart from "../components/Cart/CardCart/CardCart";
 import InfoCart from "../components/Cart/InfoCart/InfoCart";
 
+import {
+  useGetCartContentsQuery,
+  useRemoveItemFromCartMutation,
+  usePartialUpdateItemMutation,
+  useClearCartMutation,
+} from "../api/cart";
+import { Loader } from "../components/UI/Loader/Loader";
+
 const CartPage = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: "2 раза посидел - 1 постоял",
-      price: 1192,
-      quantity: 1,
-      image: s,
-    },
-    {
-      id: 2,
-      name: "2 раза посидел - 1 постоял",
-      price: 1192,
-      quantity: 1,
-      image: s,
-    },
-    {
-      id: 3,
-      name: "2 раза посидел - 1 постоял",
-      price: 1192,
-      quantity: 1,
-      image: s,
-    },
-  ]);
+  const {
+    data: cartItems = [],
+    isLoading,
+    isError,
+    refetch,
+  } = useGetCartContentsQuery();
 
-  // Функция удаления товара из корзины
-  const removeItem = (id) => {
-    setCartItems(cartItems.filter((item) => item.id !== id));
+  const [removeItemFromCart] = useRemoveItemFromCartMutation();
+  const [partialUpdateItem] = usePartialUpdateItemMutation();
+  const [clearCart] = useClearCartMutation();
+
+  const handleRemoveItem = async (id) => {
+    try {
+      await removeItemFromCart(id).unwrap();
+    } catch (error) {
+      console.error("Ошибка при удалении товара из корзины", error);
+    }
   };
 
-  // Функция обновления количества товара в корзине
-  const updateItemQuantity = (id, quantity) => {
-    setCartItems(
-      cartItems.map((item) => (item.id === id ? { ...item, quantity } : item))
+  const handleQuantityChange = async (product_id, quantity) => {
+    if (quantity < 1) return;
+    try {
+      await partialUpdateItem({ product_id, quantity }).unwrap();
+      await refetch();
+    } catch (error) {
+      console.error("Ошибка при обновлении количества товара", error);
+    }
+  };
+
+  const handleClearCart = async () => {
+    try {
+      await clearCart().unwrap();
+    } catch (error) {
+      console.error("Ошибка при очистке корзины", error);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <Loader />
+      </div>
     );
-  };
+  }
+
+  if (isError) {
+    return <p>Ошибка загрузки корзины</p>;
+  }
 
   return (
     <div className="cart">
-      {cartItems.length === 0 ? (
+      {cartItems === null ? (
         <EmptyCart />
       ) : (
-        <div>
+        <>
           <h1 className="cart__title">Корзина</h1>
           <div className="cart__container">
             <div>
@@ -54,14 +75,14 @@ const CartPage = () => {
                 <CardCart
                   key={item.id}
                   product={item}
-                  onRemove={removeItem}
-                  onQuantityChange={updateItemQuantity} // передаем функцию изменения количества
+                  onRemove={handleRemoveItem}
+                  onQuantityChange={handleQuantityChange}
                 />
               ))}
             </div>
-            <InfoCart items={cartItems} /> {/* Обновленные данные корзины */}
+            <InfoCart items={cartItems} onClearCart={handleClearCart}/>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

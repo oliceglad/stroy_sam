@@ -4,14 +4,8 @@ import Cookies from "js-cookie";
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://92.242.60.110:8000/api",
-    prepareHeaders: (headers) => {
-      const token = Cookies.get("access_token");
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
+    baseUrl: "/api",
+    credentials: "include",
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
@@ -43,9 +37,9 @@ export const userApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          Cookies.set("access_token", data.access_token);
+          Cookies.set("access", data.access_token);
           if (data.refresh_token) {
-            Cookies.set("refresh_token", data.refresh_token);
+            Cookies.set("refresh", data.refresh_token);
           }
         } catch {}
       },
@@ -59,8 +53,8 @@ export const userApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           await queryFulfilled;
-          Cookies.remove("access_token");
-          Cookies.remove("refresh_token");
+          Cookies.remove("access");
+          Cookies.remove("refresh");
         } catch {}
       },
     }),

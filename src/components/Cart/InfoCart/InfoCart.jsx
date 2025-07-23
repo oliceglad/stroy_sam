@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./InfoCart.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const InfoCart = ({ items }) => {
+const InfoCart = ({ items, onClearCart }) => {
   const totalPrice = items?.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -12,7 +12,7 @@ const InfoCart = ({ items }) => {
   const location = useLocation();
 
   const handleGoButton = () => {
-    if (location.pathname == "/delivery") {
+    if (location.pathname === "/delivery") {
       navigate("/success");
     } else {
       navigate("/delivery");
@@ -34,11 +34,18 @@ const InfoCart = ({ items }) => {
       </div>
       <button
         className={styles["infoCart__checkoutButton"]}
-        onClick={() => handleGoButton()}
+        onClick={handleGoButton}
       >
-        {location.pathname == "/delivery"
+        {location.pathname === "/delivery"
           ? "Оформить заказ"
           : "Перейти к оформлению"}
+      </button>
+      <button
+        className={styles["infoCart__clearButton"]}
+        onClick={onClearCart}
+        type="button"
+      >
+        Очистить корзину
       </button>
     </div>
   );

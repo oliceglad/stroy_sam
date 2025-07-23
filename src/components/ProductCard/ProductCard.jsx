@@ -1,11 +1,32 @@
 import React from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 import styles from "./ProductCard.module.scss";
+
+import {
+  useAddItemToCartMutation,
+  usePartialUpdateItemMutation,
+  useRemoveItemFromCartMutation,
+  useGetCartContentsQuery,
+} from "../../api/cart";
+import { Delete } from "../UI/Delete/Delete";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { categoryId, subId } = useParams();
+
+  const { data: cart, refetch } = useGetCartContentsQuery();
+  const [addItemToCart] = useAddItemToCartMutation();
+  const [partialUpdateItem] = usePartialUpdateItemMutation();
+  const [removeItemFromCart] = useRemoveItemFromCartMutation();
+
+  const accessToken = Cookies.get("access");
+
+  const cartItem = cart?.find((i) => i.product_id === product.id);
+  const quantity = cartItem?.quantity || 0;
+  const cartItemId = cartItem?.product_id || null;
+  const deleteItemId = cartItem?.id || null;
 
   const imageUrl = product.image_url
     ? product.image_url + "_small.jpeg"
@@ -25,23 +46,104 @@ const ProductCard = ({ product }) => {
     navigate(link);
   };
 
-  const handleAddToCart = (e) => {
+  const handleAddToCart = async (e) => {
     e.stopPropagation();
-    console.log("Добавлено в корзину:", product);
+    if (!accessToken) return;
+
+    try {
+      if (quantity > 0 && cartItemId) {
+        await partialUpdateItem({
+          product_id: cartItemId,
+          quantity: quantity + 1,
+        });
+      } else {
+        await addItemToCart({ product_id: product.id, quantity: 1 });
+      }
+      await refetch();
+    } catch (err) {
+      console.error("Ошибка добавления в корзину:", err);
+    }
+  };
+
+  const handleDecreaseQuantity = async (e) => {
+    e.stopPropagation();
+    if (!accessToken || !cartItemId || quantity <= 0) return;
+
+    try {
+      if (quantity === 1) {
+        await removeItemFromCart(deleteItemId);
+      } else {
+        await partialUpdateItem({
+          product_id: cartItemId,
+          quantity: quantity - 1,
+        });
+      }
+      await refetch();
+    } catch (err) {
+      console.error("Ошибка уменьшения количества:", err);
+    }
+  };
+
+  const handleRemoveFromCart = async (e) => {
+    e.stopPropagation();
+    if (!accessToken && !cartItemId) return;
+
+    try {
+      await removeItemFromCart(deleteItemId);
+      await refetch();
+    } catch (err) {
+      console.error("Ошибка удаления из корзины:", err);
+    }
   };
 
   return (
     <li className={styles.card} onClick={handleCardClick}>
       <img src={imageUrl} alt={product.product_name} />
+
       <div className={styles.card__info}>
-        <h3 title={product.product_name} className={styles.card__title}>
+        <h3 className={styles.card__title} title={product.product_name}>
           {product.product_name}
         </h3>
         <div className={styles.card__price}>{product.price} руб.</div>
+        {quantity > 0 ? (
+          <div className={styles.card__quantityWrapper}>
+            <div className={styles.card__quantity}>
+              <button
+                className={styles.card__quantityButton}
+                onClick={handleDecreaseQuantity}
+                type="button"
+              >
+                −
+              </button>
+              <span className={styles.card__quantityCount}>{quantity}</span>
+              <button
+                className={styles.card__quantityButton}
+                onClick={handleAddToCart}
+                type="button"
+              >
+                +
+              </button>
+            </div>
+
+            <button
+              className={styles.card__remove}
+              onClick={handleRemoveFromCart}
+              type="button"
+              title="Удалить из корзины"
+            >
+              <Delete />
+            </button>
+          </div>
+        ) : (
+          <button
+            className={styles.card__button}
+            onClick={handleAddToCart}
+            type="button"
+          >
+            Добавить в корзину
+          </button>
+        )}
       </div>
-      <button className={styles.card__button} onClick={handleAddToCart}>
-        В корзину
-      </button>
     </li>
   );
 };

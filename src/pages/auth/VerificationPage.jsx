@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NumberInput from "../../components/UI/NumberInput/numberInput";
 import Button from "../../components/UI/Button/button";
-import { useLoginUserMutation } from "../../api/user";
+import { useLoginUserMutation, useSmsVerificationMutation } from "../../api/user";
 import { useNavigate } from "react-router-dom";
 
 const VerificationPage = () => {
@@ -10,6 +10,8 @@ const VerificationPage = () => {
   const [canResend, setCanResend] = useState(false);
   const [code, setCode] = useState("");
   const [login] = useLoginUserMutation();
+
+  const [smsVerify] = useSmsVerificationMutation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,11 +36,17 @@ const VerificationPage = () => {
     }
   };
 
-  const handleResend = () => {
+  const handleResend = async () => {
     if (!canResend) return;
     setTimer(30);
     setCanResend(false);
-    // сюда можно снова вызвать useSmsVerificationMutation
+
+    try {
+      await smsVerify({ phone: phone }).unwrap();
+      navigate("/categories");
+    } catch (err) {
+      console.error("Ошибка при отправке СМС:", err);
+    }
     alert("Код повторно отправлен");
   };
 

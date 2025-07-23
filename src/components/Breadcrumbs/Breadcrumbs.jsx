@@ -31,7 +31,6 @@ const Breadcrumbs = () => {
     productId = pathnames[2];
   }
 
-
   const categoryId = pathnames[1];
   const subcategoryId = pathnames[2] === "products" ? null : pathnames[2];
 
@@ -109,6 +108,13 @@ const Breadcrumbs = () => {
     crumbs.push(
       <span key="sep5" className={styles.separator}>›</span>,
       <span key="product">{product.product_name}</span>
+    );
+  }
+  
+  if (location.pathname === "/cart") {
+    crumbs.push(
+      <span key="sep-cart" className={styles.separator}>›</span>,
+      <span key="cart">Корзина</span>
     );
   }
 
