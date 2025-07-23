@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import s from "./Header.module.scss";
+import SearchInput from "../UI/SearchInput/SearchInput";
+import { Search } from "../UI/Search/Search";
 
 const Header = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -71,57 +73,9 @@ const Header = () => {
 
       <div className={s.header__center}>
         <div className={s.header__searchWrapper}>
-          <input
-            type="text"
-            className={s.header__search}
-            placeholder="Поиск..."
-            value={searchValue}
-            onChange={handleSearchChange}
-            onFocus={() => {
-              if (searchValue.length >= 2) {
-                setShowDropdown(true);
-              }
-            }}
-            onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
-          />
-          <svg
-            width="17"
-            height="17"
-            viewBox="0 0 17 17"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className={s.header__searchIcon}
-          >
-            <path
-              d="M7.96603 14.5663C11.6892 14.5663 14.7074 11.5481 14.7074 7.82491C14.7074 4.10173 11.6892 1.0835 7.96603 1.0835C4.24284 1.0835 1.22461 4.10173 1.22461 7.82491C1.22461 11.5481 4.24284 14.5663 7.96603 14.5663Z"
-              stroke="#161616"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M12.6548 12.8638L15.2978 15.5"
-              stroke="#161616"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Search className={s.header__searchIcon}/>
+          <SearchInput />
         </div>
-
-        {showDropdown && (
-          <ul className={s.header__dropdown}>
-            {mockHistory.map((item, idx) => (
-              <li
-                key={idx}
-                className={s.header__dropdownItem}
-                onClick={() => handleSelectItem(item)}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
 
       <div className={s.header__right}>

@@ -151,7 +151,7 @@
   }
 }
 
-.page {
+.categoryProductPage {
   &__notfound {
     text-align: center;
     color: grey;
@@ -165,10 +165,31 @@
 }
 
 .product {
-
   &__content {
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
+  }
+}
+
+.searchPage {
+
+  &__title {
+    margin-bottom: 20px;
+
+
+    & span {
+      font-weight: bold;
+    }
+  }
+  &__notfound {
+    text-align: center;
+    color: grey;
+  }
+
+  &__products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
   }
 }

@@ -1,23 +1,39 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import styles from "./Breadcrumbs.module.scss";
+import { useLocation, Link } from "react-router-dom";
 import {
   useGetMainCategoriesQuery,
   useGetSubcategoriesQuery,
 } from "../../api/categories";
 import { useGetProductByIdQuery } from "../../api/products";
+import styles from "./Breadcrumbs.module.scss";
 
 const Breadcrumbs = () => {
   const location = useLocation();
   const { data: mainCategories } = useGetMainCategoriesQuery();
 
   const pathnames = location.pathname.split("/").filter(Boolean);
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("query");
+
+  const isSearchList =
+    pathnames[0] === "products" && pathnames[1] === "search" && pathnames.length === 2;
+
+  const isProductPageViaSearch =
+    pathnames[0] === "products" && pathnames[1] === "search" && pathnames.length === 3;
+
+  const isProductPageViaCategory =
+    pathnames.includes("categories") &&
+    pathnames[pathnames.length - 2] === "products";
+
+  let productId = null;
+  if (isProductPageViaCategory) {
+    productId = pathnames[pathnames.length - 1];
+  } else if (isProductPageViaSearch) {
+    productId = pathnames[2];
+  }
+
 
   const categoryId = pathnames[1];
   const subcategoryId = pathnames[2] === "products" ? null : pathnames[2];
-  const productId = pathnames.includes("products")
-    ? pathnames[pathnames.indexOf("products") + 1]
-    : null;
 
   const { data: subcategories } = useGetSubcategoriesQuery(categoryId, {
     skip: !categoryId,
@@ -30,7 +46,6 @@ const Breadcrumbs = () => {
   const categoryName = mainCategories?.find(
     (c) => String(c.id) === categoryId
   )?.category_name;
-
   const subcategoryName = subcategories?.find(
     (c) => String(c.id) === subcategoryId
   )?.category_name;
@@ -43,9 +58,7 @@ const Breadcrumbs = () => {
 
   if (pathnames.includes("categories")) {
     crumbs.push(
-      <span key="sep1" className={styles.separator}>
-        ›
-      </span>,
+      <span key="sep1" className={styles.separator}>›</span>,
       <Link to="/categories" key="categories">
         Все категории
       </Link>
@@ -54,9 +67,7 @@ const Breadcrumbs = () => {
 
   if (categoryId && categoryName) {
     crumbs.push(
-      <span key="sep2" className={styles.separator}>
-        ›
-      </span>,
+      <span key="sep2" className={styles.separator}>›</span>,
       <Link to={`/categories/${categoryId}/products`} key="main-cat">
         {categoryName}
       </Link>
@@ -65,9 +76,7 @@ const Breadcrumbs = () => {
 
   if (subcategoryId && subcategoryName) {
     crumbs.push(
-      <span key="sep3" className={styles.separator}>
-        ›
-      </span>,
+      <span key="sep3" className={styles.separator}>›</span>,
       <Link
         to={`/categories/${categoryId}/${subcategoryId}/products`}
         key="sub-cat"
@@ -77,11 +86,28 @@ const Breadcrumbs = () => {
     );
   }
 
-  if (productId && product?.product_name) {
+  if (isSearchList) {
     crumbs.push(
-      <span key="sep4" className={styles.separator}>
-        ›
-      </span>,
+      <span key="sep4" className={styles.separator}>›</span>,
+      <span key="search">{query || "Поиск"}</span>
+    );
+  }
+
+  if (isProductPageViaSearch) {
+    crumbs.push(
+      <span key="sep4" className={styles.separator}>›</span>,
+      <Link
+        to={`/products/search${query ? `?query=${encodeURIComponent(query)}` : ""}`}
+        key="search-link"
+      >
+        {query || "Поиск"}
+      </Link>
+    );
+  }
+
+  if ((isProductPageViaCategory || isProductPageViaSearch) && productId && product?.product_name) {
+    crumbs.push(
+      <span key="sep5" className={styles.separator}>›</span>,
       <span key="product">{product.product_name}</span>
     );
   }

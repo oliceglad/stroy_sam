@@ -26,7 +26,7 @@ const CategoryProductsPage = () => {
   };
 
   return (
-    <div className="page">
+    <div className="categoryProductPage">
       <SubCategoriesList
         subcategories={subcategories}
         subId={subId}
@@ -41,13 +41,13 @@ const CategoryProductsPage = () => {
       {error && <p>Ошибка загрузки</p>}
 
       {products?.length > 0 ? (
-        <ul className="page__products">
+        <ul className="categoryProductPage__products">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </ul>
       ) : (
-        !isLoading && <p className="page__notfound">Товаров не найдено</p>
+        !isLoading && <p className="categoryProductPage__notfound">Товаров не найдено</p>
       )}
     </div>
   );

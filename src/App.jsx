@@ -12,6 +12,7 @@ import CategoriesPage from "./pages/CategoriesPage";
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
 import CategoryProductsPage from "./pages/CategoryProductsPage";
 import ProductPage from "./pages/ProductPage";
+import SearchResultsPage from "./pages/SearchResultPage";
 
 function App() {
   return (
@@ -43,6 +44,11 @@ function App() {
             />
             <Route
               path="/categories/:categoryId/:subId/products/:productId"
+              element={<ProductPage />}
+            />
+            <Route path="/products/search" element={<SearchResultsPage />} />
+            <Route
+              path="/products/search/:productId/"
               element={<ProductPage />}
             />
           </Routes>

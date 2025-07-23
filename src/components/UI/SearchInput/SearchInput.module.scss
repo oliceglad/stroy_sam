@@ -1,0 +1,33 @@
+.searchInput {
+  position: relative;
+  width: 100%;
+
+  &__input {
+    width: 100%;
+    padding: 8px 12px;
+    background-color: transparent;
+    outline: none;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 120%;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    background: white;
+    border-top: none;
+    max-height: 200px;
+    border-radius: 10px;
+    overflow-y: auto;
+
+    &__item {
+      padding: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f2f2f2;
+      }
+    }
+  }
+}
