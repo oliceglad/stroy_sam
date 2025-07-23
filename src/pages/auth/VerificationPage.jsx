@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import NumberInput from "../../components/UI/NumberInput/numberInput";
 import Button from "../../components/UI/Button/button";
+import { useLoginUserMutation } from "../../api/user";
+import { useNavigate } from "react-router-dom";
 
 const VerificationPage = () => {
-  const phoneNumber = "+7 (999) 123-45-67";
+  const phone = sessionStorage.getItem("phone");
   const [timer, setTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
   const [code, setCode] = useState("");
+  const [login] = useLoginUserMutation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (timer === 0) {
@@ -17,22 +21,31 @@ const VerificationPage = () => {
     return () => clearInterval(interval);
   }, [timer]);
 
+  const handleSubmit = async () => {
+    try {
+      await login({
+        username: phone,
+        password: code,
+      }).unwrap();
+      sessionStorage.removeItem("phone");
+      navigate("/categories");
+    } catch (err) {
+      console.error("Ошибка при входе:", err);
+    }
+  };
+
   const handleResend = () => {
     if (!canResend) return;
     setTimer(30);
     setCanResend(false);
+    // сюда можно снова вызвать useSmsVerificationMutation
     alert("Код повторно отправлен");
-  };
-
-  const handleSubmit = () => {
-    alert("Отправка кода: " + code);
-    // сюда логика отправки
   };
 
   return (
     <div className="verification">
-      <h2 className="verification__title">Вам отправлен код по смс</h2>
-      <p className="verification__phone">На указанный номер: {phoneNumber}</p>
+      <h2 className="verification__title">Вам отправлен код по СМС</h2>
+      <p className="verification__phone">На указанный номер: {phone}</p>
 
       <NumberInput length={6} onChange={setCode} />
 
