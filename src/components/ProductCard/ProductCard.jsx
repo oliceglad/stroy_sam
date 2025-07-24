@@ -48,8 +48,6 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
-    if (!accessToken) return;
-
     try {
       if (quantity > 0 && cartItemId) {
         await partialUpdateItem({
@@ -67,7 +65,7 @@ const ProductCard = ({ product }) => {
 
   const handleDecreaseQuantity = async (e) => {
     e.stopPropagation();
-    if (!accessToken || !cartItemId || quantity <= 0) return;
+    if (!cartItemId || quantity <= 0) return;
 
     try {
       if (quantity === 1) {
@@ -86,7 +84,7 @@ const ProductCard = ({ product }) => {
 
   const handleRemoveFromCart = async (e) => {
     e.stopPropagation();
-    if (!accessToken && !cartItemId) return;
+    if (!cartItemId) return;
 
     try {
       await removeItemFromCart(deleteItemId);

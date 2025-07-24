@@ -171,10 +171,8 @@
 }
 
 .searchPage {
-
   &__title {
     margin-bottom: 20px;
-
 
     & span {
       font-weight: bold;
@@ -189,5 +187,38 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+  }
+}
+
+.profile {
+  display: flex;
+  gap: 20px;
+  &__right {
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 22px;
+    margin-bottom: 16px;
+  }
+
+  &__orders {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__empty {
+    color: #888;
+  }
+
+  &__notfound {
+    text-align: center;
+    color: grey;
+  }
+
+  &__error {
+    text-align: center;
+    color: grey;
   }
 }

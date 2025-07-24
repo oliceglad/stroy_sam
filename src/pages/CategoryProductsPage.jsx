@@ -38,7 +38,6 @@ const CategoryProductsPage = () => {
           <Loader />
         </div>
       )}
-      {error && <p>Ошибка загрузки</p>}
 
       {products?.length > 0 ? (
         <ul className="categoryProductPage__products">

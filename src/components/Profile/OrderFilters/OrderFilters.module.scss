@@ -1,0 +1,36 @@
+.orderFilters {
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+
+  & button {
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  &__button {
+    background-color: #fcbd01;
+    border: 1px solid #fcbd01;
+    color: white;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__delete {
+    background-color: transparent;
+    color: red;
+    border: 1px solid red;
+
+    &:hover {
+      background-color: red;
+      color: white;
+    }
+  }
+}

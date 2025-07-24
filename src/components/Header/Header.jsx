@@ -38,7 +38,7 @@ const Header = () => {
           <Cart className={s.header__icon} count={cartCount} />
         </NavLink>
 
-        <NavLink to="/lk" className={s.header__link}>
+        <NavLink to="/profile" className={s.header__link}>
           <User className={s.header__icon} />
         </NavLink>
       </div>

@@ -1,0 +1,25 @@
+.dateInput {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  width: 150px;
+
+  &:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 4px rgba(74, 144, 226, 0.5);
+  }
+
+  &__label {
+    margin-right: 5px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+  }
+
+  &::placeholder {
+    color: #aaa;
+  }
+}

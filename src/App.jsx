@@ -13,6 +13,7 @@ import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
 import CategoryProductsPage from "./pages/CategoryProductsPage";
 import ProductPage from "./pages/ProductPage";
 import SearchResultsPage from "./pages/SearchResultPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
               path="/products/search/:productId/"
               element={<ProductPage />}
             />
+
+            <Route path="/profile" element={<ProfilePage />} />
           </Routes>
         </div>
         <Footer />

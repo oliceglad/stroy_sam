@@ -30,7 +30,7 @@ const VerificationPage = () => {
         password: code,
       }).unwrap();
       sessionStorage.removeItem("phone");
-      navigate("/categories");
+      navigate("/profile");
     } catch (err) {
       console.error("Ошибка при входе:", err);
     }

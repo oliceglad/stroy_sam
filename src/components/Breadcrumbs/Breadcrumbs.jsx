@@ -15,10 +15,14 @@ const Breadcrumbs = () => {
   const query = searchParams.get("query");
 
   const isSearchList =
-    pathnames[0] === "products" && pathnames[1] === "search" && pathnames.length === 2;
+    pathnames[0] === "products" &&
+    pathnames[1] === "search" &&
+    pathnames.length === 2;
 
   const isProductPageViaSearch =
-    pathnames[0] === "products" && pathnames[1] === "search" && pathnames.length === 3;
+    pathnames[0] === "products" &&
+    pathnames[1] === "search" &&
+    pathnames.length === 3;
 
   const isProductPageViaCategory =
     pathnames.includes("categories") &&
@@ -57,7 +61,9 @@ const Breadcrumbs = () => {
 
   if (pathnames.includes("categories")) {
     crumbs.push(
-      <span key="sep1" className={styles.separator}>›</span>,
+      <span key="sep1" className={styles.separator}>
+        ›
+      </span>,
       <Link to="/categories" key="categories">
         Все категории
       </Link>
@@ -66,7 +72,9 @@ const Breadcrumbs = () => {
 
   if (categoryId && categoryName) {
     crumbs.push(
-      <span key="sep2" className={styles.separator}>›</span>,
+      <span key="sep2" className={styles.separator}>
+        ›
+      </span>,
       <Link to={`/categories/${categoryId}/products`} key="main-cat">
         {categoryName}
       </Link>
@@ -75,7 +83,9 @@ const Breadcrumbs = () => {
 
   if (subcategoryId && subcategoryName) {
     crumbs.push(
-      <span key="sep3" className={styles.separator}>›</span>,
+      <span key="sep3" className={styles.separator}>
+        ›
+      </span>,
       <Link
         to={`/categories/${categoryId}/${subcategoryId}/products`}
         key="sub-cat"
@@ -87,16 +97,22 @@ const Breadcrumbs = () => {
 
   if (isSearchList) {
     crumbs.push(
-      <span key="sep4" className={styles.separator}>›</span>,
+      <span key="sep4" className={styles.separator}>
+        ›
+      </span>,
       <span key="search">{query || "Поиск"}</span>
     );
   }
 
   if (isProductPageViaSearch) {
     crumbs.push(
-      <span key="sep4" className={styles.separator}>›</span>,
+      <span key="sep4" className={styles.separator}>
+        ›
+      </span>,
       <Link
-        to={`/products/search${query ? `?query=${encodeURIComponent(query)}` : ""}`}
+        to={`/products/search${
+          query ? `?query=${encodeURIComponent(query)}` : ""
+        }`}
         key="search-link"
       >
         {query || "Поиск"}
@@ -104,17 +120,34 @@ const Breadcrumbs = () => {
     );
   }
 
-  if ((isProductPageViaCategory || isProductPageViaSearch) && productId && product?.product_name) {
+  if (
+    (isProductPageViaCategory || isProductPageViaSearch) &&
+    productId &&
+    product?.product_name
+  ) {
     crumbs.push(
-      <span key="sep5" className={styles.separator}>›</span>,
+      <span key="sep5" className={styles.separator}>
+        ›
+      </span>,
       <span key="product">{product.product_name}</span>
     );
   }
-  
+
   if (location.pathname === "/cart") {
     crumbs.push(
-      <span key="sep-cart" className={styles.separator}>›</span>,
+      <span key="sep-cart" className={styles.separator}>
+        ›
+      </span>,
       <span key="cart">Корзина</span>
+    );
+  }
+
+  if (location.pathname === "/profile") {
+    crumbs.push(
+      <span key="sep-cart" className={styles.separator}>
+        ›
+      </span>,
+      <span key="cart">Профиль</span>
     );
   }
 
