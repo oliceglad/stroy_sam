@@ -12,10 +12,13 @@ const Footer = () => {
           <h3 onClick={() => navigate("/main")}>СтройСам</h3>
           <ul className={s.footer__section__list}>
             <li className={s.footer__section__list__item}>
-              <NavLink to={"/main"}>Каталог</NavLink>
+              <NavLink to={"/categories"}>Каталог</NavLink>
             </li>
             <li className={s.footer__section__list__item}>
               <NavLink to={"/contacts"}>Контакты</NavLink>
+            </li>
+            <li className={s.footer__section__list__item}>
+              <NavLink to={"/profile"}>Личный кабинет</NavLink>
             </li>
           </ul>
         </div>
