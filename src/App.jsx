@@ -14,6 +14,7 @@ import CategoryProductsPage from "./pages/CategoryProductsPage";
 import ProductPage from "./pages/ProductPage";
 import SearchResultsPage from "./pages/SearchResultPage";
 import ProfilePage from "./pages/ProfilePage";
+import FailPage from "./pages/FailPage";
 
 function App() {
   return (
@@ -26,11 +27,12 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/verification" element={<VerificationPage />} />
-            <Route path="*" element={<Navigate to="/categories" replace />} />
+            <Route path="*" element={<Navigate to="/fail" replace />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/delivery" element={<DeliveryPage />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/categories" element={<CategoriesPage />} />
+            <Route path="/fail" element={<FailPage />} />
             <Route
               path="/categories/:categoryId/products"
               element={<CategoryProductsPage />}
