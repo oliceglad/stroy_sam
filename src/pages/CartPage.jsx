@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import EmptyCart from "../components/Cart/EmptyCart/EmptyCart";
 import CardCart from "../components/Cart/CardCart/CardCart";
@@ -55,6 +55,13 @@ const CartPage = () => {
   const handleGoToDelivery = () => {
     navigate("/delivery", { state: { cartItems } });
   };
+
+  useEffect(() => {
+    if (isError) {
+      navigate("/login");
+      window.location.reload();
+    }
+  }, [isError, navigate]);
 
   if (isLoading) {
     return (
