@@ -49,13 +49,22 @@ const OrderFilters = ({ onFilter }) => {
         label="Конец"
       />
       <CustomSelect
+        selectTitle={"Все статусы"}
         options={statusOptions}
         value={status}
         onChange={setStatus}
         placeholder="Все статусы"
       />
-      <button onClick={handleApplyFilters} className={styles.orderFilters__button}>Применить</button>
-      <button onClick={handleResetFilters} className={styles.orderFilters__delete}>
+      <button
+        onClick={handleApplyFilters}
+        className={styles.orderFilters__button}
+      >
+        Применить
+      </button>
+      <button
+        onClick={handleResetFilters}
+        className={styles.orderFilters__delete}
+      >
         Сбросить фильтры
       </button>
     </div>

@@ -1,8 +1,15 @@
 import React from "react";
 import styles from "./InfoCart.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Loader } from "../../UI/Loader/Loader";
 
-const InfoCart = ({ items, onClearCart }) => {
+const InfoCart = ({
+  items,
+  onClearCart,
+  goToDelivery,
+  onCreateOrder,
+  isLoading,
+}) => {
   const totalPrice = items?.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -13,9 +20,9 @@ const InfoCart = ({ items, onClearCart }) => {
 
   const handleGoButton = () => {
     if (location.pathname === "/delivery") {
-      navigate("/success");
+      onCreateOrder();
     } else {
-      navigate("/delivery");
+      goToDelivery();
     }
   };
 
@@ -36,17 +43,24 @@ const InfoCart = ({ items, onClearCart }) => {
         className={styles["infoCart__checkoutButton"]}
         onClick={handleGoButton}
       >
-        {location.pathname === "/delivery"
-          ? "Оформить заказ"
-          : "Перейти к оформлению"}
+        {isLoading ? (
+          <Loader width={20} height={20}/>
+        ) : location.pathname === "/delivery" ? (
+          "Оформить заказ"
+        ) : (
+          "Перейти к оформлению"
+        )}
       </button>
-      <button
-        className={styles["infoCart__clearButton"]}
-        onClick={onClearCart}
-        type="button"
-      >
-        Очистить корзину
-      </button>
+
+      {location.pathname === "/cart" ? (
+        <button
+          className={styles["infoCart__clearButton"]}
+          onClick={onClearCart}
+          type="button"
+        >
+          Очистить корзину
+        </button>
+      ) : null}
     </div>
   );
 };

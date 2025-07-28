@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./CustomSelect.module.scss";
 
-const CustomSelect = ({ options, value, onChange, placeholder }) => {
+const CustomSelect = ({selectTitle, options, value, onChange, placeholder, classSelect = "", classSelected = ""}) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
 
@@ -20,12 +20,12 @@ const CustomSelect = ({ options, value, onChange, placeholder }) => {
 
   return (
     <div
-      className={styles.customSelect}
+      className={`${styles.customSelect} ${classSelect}`}
       ref={ref}
       tabIndex={0}
     >
       <div
-        className={styles.selected}
+        className={`${styles.selected} ${classSelected}`}
         onClick={() => setIsOpen((prev) => !prev)}
         role="button"
         aria-haspopup="listbox"
@@ -47,7 +47,7 @@ const CustomSelect = ({ options, value, onChange, placeholder }) => {
             aria-selected={!value}
             tabIndex={0}
           >
-            Все статусы
+            {selectTitle}
           </li>
           {options.map(({ value: val, label }) => (
             <li

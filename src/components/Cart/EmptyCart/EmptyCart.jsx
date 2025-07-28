@@ -8,7 +8,7 @@ const EmptyCart = () => {
       <p className={s.emptyCart__info}>
         В корзине пусто <br /> перейдите в каталог, чтобы добавить нужные товары
       </p>
-      <NavLink className={s.emptyCart__link} to={"/catalog"}>
+      <NavLink className={s.emptyCart__link} to={"/categories"}>
         Перейти в каталог
       </NavLink>
     </div>

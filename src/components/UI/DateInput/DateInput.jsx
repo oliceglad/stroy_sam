@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./DateInput.module.scss";
 
-const DateInput = ({ value, onChange, placeholder, label }) => {
+const DateInput = ({ value, onChange, placeholder, label, style}) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} style={{...style}}>
       {label && <label className={styles.dateInput__label}>{label}</label>}
       <input
         className={styles.dateInput}

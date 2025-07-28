@@ -17,15 +17,15 @@ export const User = ({className}) => {
       <path
         d="M24 28C28.4183 28 32 24.4183 32 20C32 15.5817 28.4183 12 24 12C19.5817 12 16 15.5817 16 20C16 24.4183 19.5817 28 24 28Z"
         stroke="#1C1B1B"
-        stroke-width="2"
-        stroke-miterlimit="10"
+        strokeWidth="2"
+        strokeMiterlimit="10"
       />
       <path
         d="M11.875 35C13.1037 32.8714 14.871 31.1038 16.9994 29.8749C19.1278 28.6459 21.5423 27.9989 24 27.9989C26.4577 27.9989 28.8722 28.6459 31.0006 29.8749C33.129 31.1038 34.8963 32.8714 36.125 35"
         stroke="#1C1B1B"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

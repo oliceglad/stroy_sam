@@ -1,8 +1,12 @@
 import React from "react";
 
-export const Loader = () => {
+export const Loader = ({ width = 50, height = 50 }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" style={{width: 50, height: 50}}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 200 200"
+      style={{width: width, height: height }}
+    >
       <radialGradient
         id="a12"
         cx=".66"
@@ -11,20 +15,20 @@ export const Loader = () => {
         fy=".3125"
         gradientTransform="scale(1.5)"
       >
-        <stop offset="0" stop-color="#080103"></stop>
-        <stop offset=".3" stop-color="#080103" stop-opacity=".9"></stop>
-        <stop offset=".6" stop-color="#080103" stop-opacity=".6"></stop>
-        <stop offset=".8" stop-color="#080103" stop-opacity=".3"></stop>
-        <stop offset="1" stop-color="#080103" stop-opacity="0"></stop>
+        <stop offset="0" stopColor="#080103"></stop>
+        <stop offset=".3" stopColor="#080103" stopOpacity=".9"></stop>
+        <stop offset=".6" stopColor="#080103" stopOpacity=".6"></stop>
+        <stop offset=".8" stopColor="#080103" stopOpacity=".3"></stop>
+        <stop offset="1" stopColor="#080103" stopOpacity="0"></stop>
       </radialGradient>
       <circle
-        transform-origin="center"
+        transformOrigin="center"
         fill="none"
         stroke="url(#a12)"
-        stroke-width="15"
-        stroke-linecap="round"
-        stroke-dasharray="200 1000"
-        stroke-dashoffset="0"
+        strokeWidth="15"
+        strokeLinecap="round"
+        strokeDasharray="200 1000"
+        strokeDashoffset="0"
         cx="100"
         cy="100"
         r="70"
@@ -41,12 +45,12 @@ export const Loader = () => {
         ></animateTransform>
       </circle>
       <circle
-        transform-origin="center"
+        transformOrigin="center"
         fill="none"
         opacity=".2"
         stroke="#080103"
-        stroke-width="15"
-        stroke-linecap="round"
+        strokeWidth="15"
+        strokeLinecap="round"
         cx="100"
         cy="100"
         r="70"

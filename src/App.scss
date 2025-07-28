@@ -76,8 +76,6 @@
 
 .deliveryPage {
   display: flex;
-  justify-content: space-between;
-  padding: 16px;
   padding-bottom: 50px;
 
   &__form {
@@ -103,10 +101,6 @@
   &__name {
     display: flex;
     gap: 20px;
-  }
-
-  &__infoCart {
-    width: 28%;
   }
 }
 

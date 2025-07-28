@@ -151,6 +151,15 @@ const Breadcrumbs = () => {
     );
   }
 
+    if (location.pathname === "/delivery") {
+    crumbs.push(
+      <span key="sep-cart" className={styles.separator}>
+        ›
+      </span>,
+      <span key="cart">Оформление доставки</span>
+    );
+  }
+
   return <div className={styles.breadcrumbs}>{crumbs}</div>;
 };
 

@@ -1,8 +1,9 @@
 import React from "react";
-import s from "../assets/images/1.png";
+import { useNavigate } from "react-router-dom";
 import EmptyCart from "../components/Cart/EmptyCart/EmptyCart";
 import CardCart from "../components/Cart/CardCart/CardCart";
 import InfoCart from "../components/Cart/InfoCart/InfoCart";
+import { Loader } from "../components/UI/Loader/Loader";
 
 import {
   useGetCartContentsQuery,
@@ -10,9 +11,10 @@ import {
   usePartialUpdateItemMutation,
   useClearCartMutation,
 } from "../api/cart";
-import { Loader } from "../components/UI/Loader/Loader";
 
 const CartPage = () => {
+  const navigate = useNavigate();
+
   const {
     data: cartItems = [],
     isLoading,
@@ -50,6 +52,10 @@ const CartPage = () => {
     }
   };
 
+  const handleGoToDelivery = () => {
+    navigate("/delivery", { state: { cartItems } });
+  };
+
   if (isLoading) {
     return (
       <div style={{ textAlign: "center" }}>
@@ -64,7 +70,7 @@ const CartPage = () => {
 
   return (
     <div className="cart">
-      {cartItems === null ? (
+      {cartItems === null || cartItems.length === 0 ? (
         <EmptyCart />
       ) : (
         <>
@@ -80,7 +86,11 @@ const CartPage = () => {
                 />
               ))}
             </div>
-            <InfoCart items={cartItems} onClearCart={handleClearCart}/>
+            <InfoCart
+              items={cartItems}
+              onClearCart={handleClearCart}
+              goToDelivery={handleGoToDelivery}
+            />
           </div>
         </>
       )}
