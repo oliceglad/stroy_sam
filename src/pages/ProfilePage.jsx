@@ -1,3 +1,4 @@
+// pages/ProfilePage.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,9 +8,11 @@ import { Loader } from "../components/UI/Loader/Loader";
 import ProfileInfo from "../components/Profile/ProfileInfo/ProfileInfo";
 import OrderFilters from "../components/Profile/OrderFilters/OrderFilters";
 import OrderCard from "../components/Profile/OrderCard/OrderCard";
+import OrderDrawer from "../components/Profile/OrderDrawer/OrderDrawer";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const [drawerOrderId, setDrawerOrderId] = useState(null);
 
   const {
     data: user,
@@ -18,9 +21,7 @@ const ProfilePage = () => {
   } = useGetMeQuery();
 
   const [logoutUser] = useLogoutUserMutation();
-
   const [filters, setFilters] = useState({});
-
   const {
     data: orders = [],
     isLoading: ordersLoading,
@@ -54,7 +55,7 @@ const ProfilePage = () => {
 
   return (
     <div className="profile">
-      <ProfileInfo user={user} onLogout={handleLogout} />{" "}
+      <ProfileInfo user={user} onLogout={handleLogout} />
       <div className="profile__right">
         <h2 className="profile__title">Мои заказы</h2>
         <OrderFilters onFilter={setFilters} />
@@ -66,9 +67,23 @@ const ProfilePage = () => {
             Нет заказов по выбранным параметрам
           </p>
         ) : (
-          orders.map((order) => <OrderCard key={order.id} order={order} />)
+          orders.map((order) => (
+            <OrderCard
+              key={order.id}
+              order={order}
+              onClick={setDrawerOrderId}
+            />
+          ))
         )}
       </div>
+
+      {drawerOrderId && (
+        <OrderDrawer
+          orderId={drawerOrderId}
+          orderInfo={orders.find( order => order.id === drawerOrderId)}
+          onClose={() => setDrawerOrderId(null)}
+        />
+      )}
     </div>
   );
 };
