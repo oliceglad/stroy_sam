@@ -143,9 +143,19 @@
 }
 
 .categoryProductPage {
+
+  &__body {
+    display: flex;
+  }
   &__notfound {
     text-align: center;
     color: grey;
+  }
+
+  &__content {
+    width: 100%;
+    max-height: 70vh;
+    overflow: scroll;
   }
 
   &__products {

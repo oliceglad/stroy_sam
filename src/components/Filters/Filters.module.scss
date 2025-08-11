@@ -1,0 +1,53 @@
+.filters {
+  padding: 12px;
+  border-right: 1px solid #e6e6e6;
+  background: #fff;
+
+  &__empty {
+    color: #666;
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+  &__group {
+    margin-bottom: 12px;
+
+    &__title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    &__options {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    margin-top: 12px;
+    gap: 8px;
+
+    &__applyBtn,
+    &__clearBtn {
+      padding: 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    &__applyBtn {
+      background-color: #fcbd01;
+    }
+
+    &__clearBtn {
+      background-color: black;
+    }
+  }
+}

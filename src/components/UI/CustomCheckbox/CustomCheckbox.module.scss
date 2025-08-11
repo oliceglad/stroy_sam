@@ -1,0 +1,40 @@
+.customCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  color: #333;
+
+  &__input {
+    display: none;
+  }
+
+  &__box {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background-color 0.2s;
+  }
+
+  &__input:checked + &__box {
+    background-color: #fcbd01;
+    border-color: #fcbd01;
+  }
+
+  &__icon {
+    width: 14px;
+    height: 14px;
+    color: #fff;
+  }
+
+  &__label {
+    flex: 1;
+  }
+}
