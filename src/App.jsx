@@ -15,6 +15,8 @@ import ProductPage from "./pages/ProductPage";
 import SearchResultsPage from "./pages/SearchResultPage";
 import ProfilePage from "./pages/ProfilePage";
 import FailPage from "./pages/FailPage";
+import MainPage from "./pages/MainPage";
+import SubCategoriesPage from "./pages/SubCategoriesPage";
 
 function App() {
   return (
@@ -32,21 +34,18 @@ function App() {
             <Route path="/delivery" element={<DeliveryPage />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/categories" element={<CategoriesPage />} />
+            <Route
+              path="/categories/:categoryId"
+              element={<SubCategoriesPage />}
+            />
             <Route path="/fail" element={<FailPage />} />
+            <Route path="/" element={<MainPage />} />
             <Route
               path="/categories/:categoryId/products"
               element={<CategoryProductsPage />}
             />
             <Route
-              path="/categories/:categoryId/:subId/products"
-              element={<CategoryProductsPage />}
-            />
-            <Route
               path="/categories/:categoryId/products/:productId"
-              element={<ProductPage />}
-            />
-            <Route
-              path="/categories/:categoryId/:subId/products/:productId"
               element={<ProductPage />}
             />
             <Route path="/products/search" element={<SearchResultsPage />} />

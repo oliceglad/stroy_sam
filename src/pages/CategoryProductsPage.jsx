@@ -28,10 +28,6 @@ const CategoryProductsPage = () => {
     skip: !activeCategoryId,
   });
 
-  // const { data: subcategories } = useGetSubcategoriesQuery(categoryId, {
-  //   skip: !categoryId,
-  // });
-
   const { data: filterOptions, isLoading: isFilterOptionsLoading } =
     useGetFilterOptionsQuery(activeCategoryId, { skip: !activeCategoryId });
 
@@ -102,12 +98,6 @@ const CategoryProductsPage = () => {
 
   return (
     <div className="categoryProductPage">
-      {/* <SubCategoriesList
-        subcategories={subcategories}
-        subId={subId}
-        onSelect={handleSubcategoryClick}
-      /> */}
-
       <div className="categoryProductPage__body">
         <Filters
           options={filterOptions}

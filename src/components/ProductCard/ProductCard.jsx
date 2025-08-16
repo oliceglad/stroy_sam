@@ -137,8 +137,8 @@ const ProductCard = ({ product }) => {
             className={styles.card__button}
             onClick={handleAddToCart}
             type="button"
-            disabled={cart ? false : true}
-            title={cart ? "Добавить в корзину" : "Чтобы добавить в корзину товар, авторизуйтесь"}
+            // disabled={cart ? false : true}
+            // title={cart ? "Добавить в корзину" : "Чтобы добавить в корзину товар, авторизуйтесь"}
           >
             Добавить в корзину
           </button>

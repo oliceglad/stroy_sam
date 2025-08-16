@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className={s.footer}>
       <div className={s.footer__container}>
         <div className={s.footer__section}>
-          <h3 onClick={() => navigate("/main")}>СтройСам</h3>
+          <h3 onClick={() => navigate("/")}>СтройСам</h3>
           <ul className={s.footer__section__list}>
             <li className={s.footer__section__list__item}>
               <NavLink to={"/categories"}>Каталог</NavLink>

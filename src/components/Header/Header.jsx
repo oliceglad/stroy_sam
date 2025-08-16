@@ -21,7 +21,7 @@ const Header = () => {
         <NavLink to="/categories" className={s.header__link}>
           <Catalog className={s.header__icon} />
         </NavLink>
-        <NavLink to="/catalog" className={s.header__logo}>
+        <NavLink to="/" className={s.header__logo}>
           <h1 className={s.header__title}>СтройСам</h1>
         </NavLink>
       </div>

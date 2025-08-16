@@ -1,4 +1,5 @@
 .categoriesCard {
+  max-width: 159px;
   &__img {
     width: 150px;
     height: 150px;
@@ -15,7 +16,6 @@
   }
 
   &__title {
-    max-width: 150px;
     line-height: 1.25;
     font-size: 18px;
     font-weight: bold;
