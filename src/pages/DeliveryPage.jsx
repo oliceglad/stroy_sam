@@ -21,6 +21,7 @@ const DeliveryPage = () => {
     try {
       await createOrder().unwrap();
       navigate("/success");
+      window.location.reload();
     } catch (error) {
       console.error("Ошибка при создании заказа", error);
     }

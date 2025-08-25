@@ -10,7 +10,7 @@ import {
   useGetCartContentsQuery,
 } from "../../api/cart";
 import { useGetMeQuery } from "../../api/user";
-import { Delete } from "../UI/Delete/Delete";
+import CartControls from "../UI/CartControls/CartControls";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -25,7 +25,8 @@ const ProductCard = ({ product }) => {
 
   const accessToken = Cookies.get("access");
 
-  const cartItem = cart?.data.find((i) => i.product_id === product.id);
+  const cartItem =
+    cart?.data != null && cart?.data.find((i) => i.product_id === product.id);
   const quantity = cartItem?.quantity || 0;
   const cartItemId = cartItem?.product_id || null;
   const deleteItemId = cartItem?.id || null;
@@ -112,50 +113,13 @@ const ProductCard = ({ product }) => {
           {product.product_name}
         </h3>
         <div className={styles.card__price}>{product.price} руб.</div>
-        {quantity > 0 ? (
-          <div className={styles.card__quantityWrapper}>
-            <div className={styles.card__quantity}>
-              <button
-                className={styles.card__quantityButton}
-                onClick={handleDecreaseQuantity}
-                type="button"
-              >
-                −
-              </button>
-              <span className={styles.card__quantityCount}>{quantity}</span>
-              <button
-                className={styles.card__quantityButton}
-                onClick={handleAddToCart}
-                type="button"
-              >
-                +
-              </button>
-            </div>
-
-            <button
-              className={styles.card__remove}
-              onClick={handleRemoveFromCart}
-              type="button"
-              title="Удалить из корзины"
-            >
-              <Delete />
-            </button>
-          </div>
-        ) : (
-          <button
-            className={styles.card__button}
-            onClick={handleAddToCart}
-            type="button"
-            disabled={!isAuthorized}
-            title={
-              isAuthorized
-                ? "Добавить в корзину"
-                : "Чтобы добавить товар в корзину, авторизуйтесь"
-            }
-          >
-            Добавить в корзину
-          </button>
-        )}
+        <CartControls
+          quantity={quantity}
+          onAdd={handleAddToCart}
+          onDecrease={handleDecreaseQuantity}
+          onRemove={handleRemoveFromCart}
+          isAuthorized={isAuthorized}
+        />
       </div>
     </li>
   );

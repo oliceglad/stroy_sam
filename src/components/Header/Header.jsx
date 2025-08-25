@@ -11,9 +11,10 @@ import { useGetCartContentsQuery } from "../../api/cart";
 const Header = () => {
   const { data, isSuccess } = useGetCartContentsQuery();
 
-  const cartCount = isSuccess
-    ? data?.data.reduce((sum, item) => sum + item.quantity, 0)
-    : 0;
+  const cartCount =
+    data?.data != null && isSuccess
+      ? data?.data.reduce((sum, item) => sum + item.quantity, 0)
+      : 0;
 
   return (
     <header className={s.header}>

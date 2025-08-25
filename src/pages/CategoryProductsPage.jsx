@@ -7,9 +7,6 @@ import {
   useGetProductsByFilterMutation,
 } from "../api/products";
 
-// import { useGetSubcategoriesQuery } from "../api/categories";
-
-// import SubCategoriesList from "../components/SubCategoriesList/SubCategoriesList";
 import ProductCard from "../components/ProductCard/ProductCard";
 import Filters from "../components/Filters/Filters";
 import { Loader } from "../components/UI/Loader/Loader";
@@ -41,10 +38,6 @@ const CategoryProductsPage = () => {
     setSelectedFilters({});
     setFilteredProducts(null);
   }, [activeCategoryId]);
-
-  const handleSubcategoryClick = (sub) => {
-    navigate(`/categories/${categoryId}/${sub.id}/products`);
-  };
 
   const handleToggleOption = (attributeName, value) => {
     setSelectedFilters((prev) => {

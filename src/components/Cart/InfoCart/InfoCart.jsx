@@ -31,7 +31,7 @@ const InfoCart = ({
       <div className={styles["infoCart__header"]}>Ваша корзина</div>
       <div className={styles["infoCart__items"]}>
         <div className={styles["infoCart__row"]}>
-          <span>Товары ({items?.length})</span>
+          <span>Товары ({items?.data.length})</span>
           <span>{totalPrice}₽</span>
         </div>
       </div>

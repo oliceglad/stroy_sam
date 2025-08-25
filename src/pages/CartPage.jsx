@@ -77,7 +77,7 @@ const CartPage = () => {
 
   return (
     <div className="cart">
-      {cartItems === null || cartItems.data.length === 0 ? (
+      {cartItems.data === null || cartItems.data.length === 0 ? (
         <EmptyCart />
       ) : (
         <>

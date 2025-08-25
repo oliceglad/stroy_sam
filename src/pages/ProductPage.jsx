@@ -23,11 +23,7 @@ const ProductPage = () => {
     <div className="product">
       <div className="product__content">
         <ProductImages imageUrls={product.image_urls} />
-        <ProductInfo
-          name={product.product_name}
-          description={product.description}
-          price={product.price}
-        />
+        <ProductInfo product={product} />
       </div>
       <ProductAttributes attributes={product.product_attributes} />
     </div>
