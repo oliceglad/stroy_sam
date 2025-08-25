@@ -52,6 +52,14 @@
     border-radius: 30px;
     padding-left: 50px;
     background-color: #f3f9fb;
+
+    @media (max-width: 1024px) {
+      width: 450px;
+    }
+
+    @media (max-width: 800px) {
+      width: 300px;
+    }
   }
   &__searchIcon {
     position: absolute;
