@@ -36,7 +36,7 @@ export const Cart = ({ className, count = 0 }) => {
             />
             <text
               x="34"
-              y="18"
+              y="15"
               textAnchor="middle"
               dominantBaseline="middle"
               fontSize="12"
