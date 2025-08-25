@@ -6,6 +6,7 @@ import VerificationModal from "../../components/VerificationModal/VerificationMo
 
 const LoginPage = () => {
   const [phone, setPhone] = useState("");
+  const [timer, setTimer] = useState(30);
   const [modalOpen, setModalOpen] = useState(false);
   const [smsVerify] = useSmsVerificationMutation();
 
@@ -31,7 +32,14 @@ const LoginPage = () => {
 
   const handleSubmit = async () => {
     try {
-      await smsVerify({ phone }).unwrap();
+      const response = await smsVerify({ phone }).unwrap();
+      console.log(response);
+      if (response.data.time) {
+        setTimer(response.data.time);
+      } else {
+        setTimer(30);
+      }
+
       setModalOpen(true);
     } catch (err) {
       console.error("Ошибка при отправке СМС:", err);
@@ -53,7 +61,11 @@ const LoginPage = () => {
       </Button>
 
       {modalOpen && (
-        <VerificationModal phone={phone} onClose={() => setModalOpen(false)} />
+        <VerificationModal
+          phone={phone}
+          loginTimer={timer}
+          onClose={() => setModalOpen(false)}
+        />
       )}
     </div>
   );

@@ -8,8 +8,8 @@ import {
 import s from "./VerificationModal.module.scss";
 import { useNavigate } from "react-router-dom";
 
-const VerificationModal = ({ phone, onClose }) => {
-  const [timer, setTimer] = useState(30);
+const VerificationModal = ({ phone, onClose, loginTimer}) => {
+  const [timer, setTimer] = useState(loginTimer);
   const [canResend, setCanResend] = useState(false);
   const [code, setCode] = useState("");
   const [login] = useLoginUserMutation();
@@ -32,22 +32,6 @@ const VerificationModal = ({ phone, onClose }) => {
     return () => clearInterval(intervalRef.current);
   }, []);
 
-  useEffect(() => {
-    const fetchCode = async () => {
-      if (!phone) return;
-      try {
-        const response = await smsVerify({ phone }).unwrap();
-        if (response?.status === "wait" && typeof response.time === "number") {
-          setTimer(response.time);
-          setCanResend(false);
-        }
-      } catch (err) {
-        console.error("Ошибка при начальном refetch кода:", err);
-      }
-    };
-    fetchCode();
-  }, [phone, smsVerify]);
-
   const handleSubmit = async () => {
     try {
       await login({
@@ -68,11 +52,12 @@ const VerificationModal = ({ phone, onClose }) => {
     if (!canResend) return;
     try {
       const response = await smsVerify({ phone }).unwrap();
-      if (response?.status === "wait" && typeof response.time === "number") {
-        setTimer(response.time);
+      console.log(response)
+      if (response.data.time) {
+        setTimer(response.data.time);
         setCanResend(false);
       } else {
-        setTimer(30);
+        setTimer(loginTimer);
         setCanResend(false);
       }
       alert("Код повторно отправлен");
