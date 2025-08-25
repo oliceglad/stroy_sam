@@ -12,7 +12,7 @@ const Header = () => {
   const { data, isSuccess } = useGetCartContentsQuery();
 
   const cartCount = isSuccess
-    ? data?.reduce((sum, item) => sum + item.quantity, 0)
+    ? data?.data.reduce((sum, item) => sum + item.quantity, 0)
     : 0;
 
   return (

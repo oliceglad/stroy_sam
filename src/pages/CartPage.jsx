@@ -77,14 +77,14 @@ const CartPage = () => {
 
   return (
     <div className="cart">
-      {cartItems === null || cartItems.length === 0 ? (
+      {cartItems === null || cartItems.data.length === 0 ? (
         <EmptyCart />
       ) : (
         <>
           <h1 className="cart__title">Корзина</h1>
           <div className="cart__container">
             <div>
-              {cartItems.map((item) => (
+              {cartItems.data.map((item) => (
                 <CardCart
                   key={item.id}
                   product={item}

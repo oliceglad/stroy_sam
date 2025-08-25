@@ -10,7 +10,7 @@ const InfoCart = ({
   onCreateOrder,
   isLoading,
 }) => {
-  const totalPrice = items?.reduce(
+  const totalPrice = items?.data.reduce(
     (total, item) => total + item.price * item.quantity,
     0
   );

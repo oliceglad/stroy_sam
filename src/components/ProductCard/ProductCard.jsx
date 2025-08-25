@@ -17,7 +17,7 @@ const ProductCard = ({ product }) => {
   const location = useLocation();
   const { categoryId, subId } = useParams();
 
-  const { data: cart, refetch } = useGetCartContentsQuery();
+  const { data: cart, refetch, isError: cartError } = useGetCartContentsQuery();
   const { data: user, isError: userError } = useGetMeQuery();
   const [addItemToCart] = useAddItemToCartMutation();
   const [partialUpdateItem] = usePartialUpdateItemMutation();
@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
 
   const accessToken = Cookies.get("access");
 
-  const cartItem = cart?.find((i) => i.product_id === product.id);
+  const cartItem = cart?.data.find((i) => i.product_id === product.id);
   const quantity = cartItem?.quantity || 0;
   const cartItemId = cartItem?.product_id || null;
   const deleteItemId = cartItem?.id || null;
@@ -52,8 +52,7 @@ const ProductCard = ({ product }) => {
     e.stopPropagation();
     if (!user || userError) return;
     if (!cart || cartError) {
-      alert("Невозможно добавить в корзину, ошибка сервера");
-      return;
+      alert("Невозможно добавить в корзину");
     }
 
     try {

@@ -18,7 +18,7 @@ export const cartApi = createApi({
     getCartContents: build.query({
       query: () => "cart/",
       transformResponse: (response) => ({
-        ...response.data,
+        data: response.data,
         status: response.status,
       }),
       transformErrorResponse: (response) => ({
