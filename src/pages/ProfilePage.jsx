@@ -18,6 +18,7 @@ const ProfilePage = () => {
     data: user,
     isLoading: userLoading,
     isError: userError,
+    error: userFetchError,
   } = useGetMeQuery();
 
   const [logoutUser] = useLogoutUserMutation();
@@ -39,11 +40,11 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    if (userError && user === undefined) {
+    if (userError && userFetchError?.status === 401) {
       navigate("/login");
       window.location.reload();
     }
-  }, [userError, user, navigate]);
+  }, [userError, userFetchError, navigate]);
 
   if (userLoading || ordersLoading) {
     return (
@@ -80,7 +81,7 @@ const ProfilePage = () => {
       {drawerOrderId && (
         <OrderDrawer
           orderId={drawerOrderId}
-          orderInfo={orders.find( order => order.id === drawerOrderId)}
+          orderInfo={orders.find((order) => order.id === drawerOrderId)}
           onClose={() => setDrawerOrderId(null)}
         />
       )}

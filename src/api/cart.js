@@ -5,11 +5,26 @@ export const cartApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/users/",
     credentials: "include",
+    responseHandler: async (response) => {
+      const data = await response.json().catch(() => null);
+      return {
+        data,
+        status: response.status,
+      };
+    },
   }),
   tagTypes: ["Cart"],
   endpoints: (build) => ({
     getCartContents: build.query({
       query: () => "cart/",
+      transformResponse: (response) => ({
+        ...response.data,
+        status: response.status,
+      }),
+      transformErrorResponse: (response) => ({
+        status: response.status,
+        error: response.data,
+      }),
       providesTags: ["Cart"],
     }),
 
@@ -19,6 +34,10 @@ export const cartApi = createApi({
         method: "POST",
         body: item,
       }),
+      transformResponse: (response) => ({
+        ...response.data,
+        status: response.status,
+      }),
       invalidatesTags: ["Cart"],
     }),
 
@@ -26,6 +45,10 @@ export const cartApi = createApi({
       query: () => ({
         url: "cart/items",
         method: "DELETE",
+      }),
+      transformResponse: (response) => ({
+        ...response.data,
+        status: response.status,
       }),
       invalidatesTags: ["Cart"],
     }),
@@ -36,6 +59,10 @@ export const cartApi = createApi({
         method: "PATCH",
         body: item,
       }),
+      transformResponse: (response) => ({
+        ...response.data,
+        status: response.status,
+      }),
       invalidatesTags: ["Cart"],
     }),
 
@@ -43,6 +70,10 @@ export const cartApi = createApi({
       query: (id) => ({
         url: `cart/items/${id}`,
         method: "DELETE",
+      }),
+      transformResponse: (response) => ({
+        ...response.data,
+        status: response.status,
       }),
       invalidatesTags: ["Cart"],
     }),

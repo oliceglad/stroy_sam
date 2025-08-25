@@ -9,19 +9,29 @@ const LoginPage = () => {
   const [smsVerify] = useSmsVerificationMutation();
   const navigate = useNavigate();
 
-  const cleanPhone = (maskedPhone) => {
-    const digits = maskedPhone.replace(/\D/g, "");
-    return digits.startsWith("7") || digits.startsWith("8")
+  const formatPhone = (digits) => {
+    if (!digits) return "";
+    const str = digits.slice(0, 10); 
+    let formatted = "+7 ";
+    if (str.length > 0) formatted += "(" + str.slice(0, 3);
+    if (str.length >= 4) formatted += ") " + str.slice(3, 6);
+    if (str.length >= 7) formatted += "-" + str.slice(6, 8);
+    if (str.length >= 9) formatted += "-" + str.slice(8, 10);
+    return formatted;
+  };
+
+  const handleChange = (e) => {
+    const digits = e.target.value.replace(/\D/g, "");
+    const cleaned = digits.startsWith("7") || digits.startsWith("8")
       ? digits.slice(1)
       : digits;
+    setPhone(cleaned);
   };
 
   const handleSubmit = async () => {
-    const purePhone = cleanPhone(phone);
     try {
-      console.log({ phone: purePhone })
-      await smsVerify({ phone: purePhone }).unwrap();
-      sessionStorage.setItem("phone", purePhone);
+      await smsVerify({ phone }).unwrap();
+      sessionStorage.setItem("phone", phone);
       navigate("/verification");
     } catch (err) {
       console.error("Ошибка при отправке СМС:", err);
@@ -34,12 +44,13 @@ const LoginPage = () => {
       <Input
         label="Номер телефона"
         placeholder="+7 (___) ___-__-__"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-        maskType="phone"
+        value={formatPhone(phone)}
+        onChange={handleChange}
       />
       <div style={{ height: 20 }} />
-      <Button onClick={handleSubmit}>Войти</Button>
+      <Button onClick={handleSubmit} disabled={phone.length < 10}>
+        Войти
+      </Button>
     </div>
   );
 };

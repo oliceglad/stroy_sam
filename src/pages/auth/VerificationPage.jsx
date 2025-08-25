@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import NumberInput from "../../components/UI/NumberInput/numberInput";
 import Button from "../../components/UI/Button/button";
-import { useLoginUserMutation, useSmsVerificationMutation } from "../../api/user";
-import { useNavigate } from "react-router-dom";
+import {
+  useLoginUserMutation,
+  useSmsVerificationMutation,
+} from "../../api/user";
 
 const VerificationPage = () => {
   const phone = sessionStorage.getItem("phone");
@@ -10,18 +13,40 @@ const VerificationPage = () => {
   const [canResend, setCanResend] = useState(false);
   const [code, setCode] = useState("");
   const [login] = useLoginUserMutation();
-
-  const [smsVerify] = useSmsVerificationMutation();
+  const [smsVerify, { isLoading }] = useSmsVerificationMutation();
   const navigate = useNavigate();
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    if (timer === 0) {
-      setCanResend(true);
-      return;
-    }
-    const interval = setInterval(() => setTimer((t) => t - 1), 1000);
-    return () => clearInterval(interval);
-  }, [timer]);
+    intervalRef.current = setInterval(() => {
+      setTimer((t) => {
+        if (t <= 1) {
+          setCanResend(true);
+          return 0;
+        }
+        return t - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  useEffect(() => {
+    const fetchCode = async () => {
+      if (!phone) return;
+      try {
+        const response = await smsVerify({ phone }).unwrap();
+        if (response?.status === "wait" && typeof response.time === "number") {
+          setTimer(response.time);
+          setCanResend(false);
+        }
+      } catch (err) {
+        console.error("Ошибка при начальном refetch кода:", err);
+      }
+    };
+
+    fetchCode();
+  }, [phone, smsVerify]);
 
   const handleSubmit = async () => {
     try {
@@ -31,23 +56,30 @@ const VerificationPage = () => {
       }).unwrap();
       sessionStorage.removeItem("phone");
       navigate("/profile");
+      window.location.reload();
     } catch (err) {
       console.error("Ошибка при входе:", err);
+      alert("Неверный код. Попробуйте снова.");
     }
   };
 
   const handleResend = async () => {
     if (!canResend) return;
-    setTimer(30);
-    setCanResend(false);
 
     try {
-      await smsVerify({ phone: phone }).unwrap();
-      navigate("/categories");
+      const response = await smsVerify({ phone }).unwrap();
+      if (response?.status === "wait" && typeof response.time === "number") {
+        setTimer(response.time);
+        setCanResend(false);
+      } else {
+        setTimer(30);
+        setCanResend(false);
+      }
+      alert("Код повторно отправлен");
     } catch (err) {
       console.error("Ошибка при отправке СМС:", err);
+      alert("Не удалось отправить код. Попробуйте позже.");
     }
-    alert("Код повторно отправлен");
   };
 
   return (
@@ -62,7 +94,7 @@ const VerificationPage = () => {
         <button
           className={`verification__resend-btn ${canResend ? "active" : ""}`}
           onClick={handleResend}
-          disabled={!canResend}
+          disabled={!canResend || isLoading}
         >
           Повторить попытку
         </button>

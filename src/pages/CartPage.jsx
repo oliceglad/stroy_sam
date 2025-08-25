@@ -18,6 +18,7 @@ const CartPage = () => {
   const {
     data: cartItems = [],
     isLoading,
+    error,
     isError,
     refetch,
   } = useGetCartContentsQuery();
@@ -57,11 +58,11 @@ const CartPage = () => {
   };
 
   useEffect(() => {
-    if (isError) {
+    if (error?.status === 401) {
       navigate("/login");
       window.location.reload();
     }
-  }, [isError, navigate]);
+  }, [error, navigate]);
 
   if (isLoading) {
     return (
@@ -70,9 +71,8 @@ const CartPage = () => {
       </div>
     );
   }
-
-  if (isError) {
-    return <p>Ошибка загрузки корзины</p>;
+  if (isError && error?.status === 500) {
+    return <p style={{textAlign: "center"}}>Ошибка загрузки корзины</p>;
   }
 
   return (

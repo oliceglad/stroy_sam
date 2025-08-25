@@ -9,6 +9,7 @@ import {
   useRemoveItemFromCartMutation,
   useGetCartContentsQuery,
 } from "../../api/cart";
+import { useGetMeQuery } from "../../api/user";
 import { Delete } from "../UI/Delete/Delete";
 
 const ProductCard = ({ product }) => {
@@ -17,6 +18,7 @@ const ProductCard = ({ product }) => {
   const { categoryId, subId } = useParams();
 
   const { data: cart, refetch } = useGetCartContentsQuery();
+  const { data: user, isError: userError } = useGetMeQuery();
   const [addItemToCart] = useAddItemToCartMutation();
   const [partialUpdateItem] = usePartialUpdateItemMutation();
   const [removeItemFromCart] = useRemoveItemFromCartMutation();
@@ -48,6 +50,12 @@ const ProductCard = ({ product }) => {
 
   const handleAddToCart = async (e) => {
     e.stopPropagation();
+    if (!user || userError) return;
+    if (!cart || cartError) {
+      alert("Невозможно добавить в корзину, ошибка сервера");
+      return;
+    }
+
     try {
       if (quantity > 0 && cartItemId) {
         await partialUpdateItem({
@@ -94,6 +102,8 @@ const ProductCard = ({ product }) => {
     }
   };
 
+  const isAuthorized = Boolean(user && !userError);
+
   return (
     <li className={styles.card} onClick={handleCardClick}>
       <img src={imageUrl} alt={product.product_name} />
@@ -137,8 +147,12 @@ const ProductCard = ({ product }) => {
             className={styles.card__button}
             onClick={handleAddToCart}
             type="button"
-            // disabled={cart ? false : true}
-            // title={cart ? "Добавить в корзину" : "Чтобы добавить в корзину товар, авторизуйтесь"}
+            disabled={!isAuthorized}
+            title={
+              isAuthorized
+                ? "Добавить в корзину"
+                : "Чтобы добавить товар в корзину, авторизуйтесь"
+            }
           >
             Добавить в корзину
           </button>

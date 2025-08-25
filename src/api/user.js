@@ -6,6 +6,10 @@ export const userApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "/api",
     credentials: "include",
+    responseHandler: async (response) => {
+      const data = await response.json().catch(() => null);
+      return { data, status: response.status };
+    },
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
@@ -77,6 +81,14 @@ export const userApi = createApi({
 
     getMe: builder.query({
       query: () => "/users/me/",
+      transformResponse: (response) => ({
+        ...response.data,
+        status: response.status,
+      }),
+      transformErrorResponse: (response) => ({
+        status: response.status,
+        error: response.data,
+      }),
       providesTags: ["User"],
     }),
   }),
