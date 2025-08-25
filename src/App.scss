@@ -7,57 +7,6 @@
     margin-bottom: 30px;
   }
 }
-
-.verification {
-  width: 400px;
-  margin: 40px auto;
-  text-align: center;
-
-  &__title {
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
-  &__phone {
-    font-size: 16px;
-    margin-bottom: 20px;
-    font-weight: 300;
-    color: grey;
-  }
-
-  &__resend {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    margin-top: 20px;
-
-    &-btn {
-      background: none;
-      border: none;
-      color: #ccc;
-      cursor: default;
-      text-decoration: none;
-
-      &.active {
-        color: #007bff;
-        cursor: pointer;
-        text-decoration: underline;
-      }
-    }
-
-    &__timer {
-      color: #999;
-    }
-  }
-
-  &__submit {
-    margin-top: 20px;
-  }
-}
-
 .cart {
   margin-top: 20px;
   &__title {

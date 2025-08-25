@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import Input from "../../components/UI/Input/input";
 import Button from "../../components/UI/Button/button";
-import { useRegisterUserMutation, useSmsVerificationMutation } from "../../api/user";
-import { useNavigate } from "react-router-dom";
+import {
+  useRegisterUserMutation,
+  useSmsVerificationMutation,
+} from "../../api/user";
+import VerificationModal from "../../components/VerificationModal/VerificationModal";
 
 const RegisterPage = () => {
   const [register] = useRegisterUserMutation();
   const [smsVerify] = useSmsVerificationMutation();
-  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     firstName: "",
@@ -15,6 +17,9 @@ const RegisterPage = () => {
     phone: "",
     email: "",
   });
+
+  const [isVerificationOpen, setIsVerificationOpen] = useState(false);
+  const [phoneForVerification, setPhoneForVerification] = useState("");
 
   const handleChange = (field) => (e) => {
     setForm((prev) => ({
@@ -42,10 +47,16 @@ const RegisterPage = () => {
 
       await smsVerify({ phone: purePhone }).unwrap();
       sessionStorage.setItem("phone", purePhone);
-      navigate("/verification");
+      setPhoneForVerification(purePhone);
+      setIsVerificationOpen(true); // открываем модалку
     } catch (err) {
       console.error("Ошибка при регистрации:", err);
+      alert("Не удалось зарегистрироваться. Проверьте данные.");
     }
+  };
+
+  const handleCloseModal = () => {
+    setIsVerificationOpen(false);
   };
 
   return (
@@ -82,6 +93,13 @@ const RegisterPage = () => {
         style={{ marginBottom: "20px" }}
       />
       <Button onClick={handleSubmit}>Зарегистрироваться</Button>
+
+      {isVerificationOpen && (
+        <VerificationModal
+          phone={phoneForVerification}
+          onClose={handleCloseModal}
+        />
+      )}
     </div>
   );
 };

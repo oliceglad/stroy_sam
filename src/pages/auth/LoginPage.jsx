@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Input from "../../components/UI/Input/input";
 import Button from "../../components/UI/Button/button";
 import { useSmsVerificationMutation } from "../../api/user";
+import VerificationModal from "../../components/VerificationModal/VerificationModal";
 
 const LoginPage = () => {
   const [phone, setPhone] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [smsVerify] = useSmsVerificationMutation();
-  const navigate = useNavigate();
 
   const formatPhone = (digits) => {
     if (!digits) return "";
-    const str = digits.slice(0, 10); 
+    const str = digits.slice(0, 10);
     let formatted = "+7 ";
     if (str.length > 0) formatted += "(" + str.slice(0, 3);
     if (str.length >= 4) formatted += ") " + str.slice(3, 6);
@@ -22,17 +22,17 @@ const LoginPage = () => {
 
   const handleChange = (e) => {
     const digits = e.target.value.replace(/\D/g, "");
-    const cleaned = digits.startsWith("7") || digits.startsWith("8")
-      ? digits.slice(1)
-      : digits;
+    const cleaned =
+      digits.startsWith("7") || digits.startsWith("8")
+        ? digits.slice(1)
+        : digits;
     setPhone(cleaned);
   };
 
   const handleSubmit = async () => {
     try {
       await smsVerify({ phone }).unwrap();
-      sessionStorage.setItem("phone", phone);
-      navigate("/verification");
+      setModalOpen(true);
     } catch (err) {
       console.error("Ошибка при отправке СМС:", err);
     }
@@ -51,6 +51,10 @@ const LoginPage = () => {
       <Button onClick={handleSubmit} disabled={phone.length < 10}>
         Войти
       </Button>
+
+      {modalOpen && (
+        <VerificationModal phone={phone} onClose={() => setModalOpen(false)} />
+      )}
     </div>
   );
 };

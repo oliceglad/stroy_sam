@@ -1,0 +1,77 @@
+.modal {
+  position: relative;
+  width: 400px;
+  margin: 40px auto;
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  &__title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  &__phone {
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 300;
+    color: grey;
+  }
+
+  &__resend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    margin-top: 20px;
+
+    &__btn {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: default;
+      text-decoration: none;
+
+      &.active {
+        color: #007bff;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+
+    &__timer {
+      color: #999;
+    }
+  }
+
+  &__submit {
+    margin-top: 20px;
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}

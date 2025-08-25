@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import NumberInput from "../../components/UI/NumberInput/numberInput";
-import Button from "../../components/UI/Button/button";
+import NumberInput from "../UI/NumberInput/numberInput";
+import Button from "../UI/Button/button";
 import {
   useLoginUserMutation,
   useSmsVerificationMutation,
 } from "../../api/user";
+import s from "./VerificationModal.module.scss";
+import { useNavigate } from "react-router-dom";
 
-const VerificationPage = () => {
-  const phone = sessionStorage.getItem("phone");
+const VerificationModal = ({ phone, onClose }) => {
   const [timer, setTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
   const [code, setCode] = useState("");
   const [login] = useLoginUserMutation();
   const [smsVerify, { isLoading }] = useSmsVerificationMutation();
-  const navigate = useNavigate();
   const intervalRef = useRef(null);
+  const modalRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
@@ -44,7 +45,6 @@ const VerificationPage = () => {
         console.error("Ошибка при начальном refetch кода:", err);
       }
     };
-
     fetchCode();
   }, [phone, smsVerify]);
 
@@ -55,6 +55,7 @@ const VerificationPage = () => {
         password: code,
       }).unwrap();
       sessionStorage.removeItem("phone");
+      onClose();
       navigate("/profile");
       window.location.reload();
     } catch (err) {
@@ -65,7 +66,6 @@ const VerificationPage = () => {
 
   const handleResend = async () => {
     if (!canResend) return;
-
     try {
       const response = await smsVerify({ phone }).unwrap();
       if (response?.status === "wait" && typeof response.time === "number") {
@@ -82,28 +82,41 @@ const VerificationPage = () => {
     }
   };
 
+  const handleOverlayClick = (e) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="verification">
-      <h2 className="verification__title">Вам отправлен код по СМС</h2>
-      <p className="verification__phone">На указанный номер: {phone}</p>
-
-      <NumberInput length={6} onChange={setCode} />
-
-      <div className="verification__resend">
-        <span>Не пришло смс?</span>
-        <button
-          className={`verification__resend-btn ${canResend ? "active" : ""}`}
-          onClick={handleResend}
-          disabled={!canResend || isLoading}
-        >
-          Повторить попытку
+    <div className={s.overlay} onClick={handleOverlayClick}>
+      <div className={s.modal} ref={modalRef}>
+        <button className={s.modal__close} onClick={onClose}>
+          ×
         </button>
-        <span className="verification__timer">
-          {timer > 0 ? `(${timer} сек)` : ""}
-        </span>
-      </div>
+        <h2 className={s.modal__title}>Вам отправлен код по СМС</h2>
+        <span className={s.modal__phone}>На номер: {phone}</span>
 
-      <div className="verification__submit">
+        <NumberInput length={6} onChange={setCode} />
+
+        <div className={s.modal__resend}>
+          <span>Не пришло смс?</span>
+          <button
+            className={
+              canResend
+                ? `${s.modal__resend__btn} ${s.active}`
+                : s.modal__resend__btn
+            }
+            onClick={handleResend}
+            disabled={!canResend || isLoading}
+          >
+            Повторить попытку
+          </button>
+          <span className={s.modal__resend__timer}>
+            {timer > 0 ? `(${timer} сек)` : ""}
+          </span>
+        </div>
+
         <Button onClick={handleSubmit} disabled={code.length < 6}>
           Отправить
         </Button>
@@ -112,4 +125,4 @@ const VerificationPage = () => {
   );
 };
 
-export default VerificationPage;
+export default VerificationModal;
