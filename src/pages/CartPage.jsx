@@ -71,20 +71,19 @@ const CartPage = () => {
       </div>
     );
   }
-  if (isError && error?.status === 500) {
-    return <p style={{textAlign: "center"}}>Ошибка загрузки корзины</p>;
+  if (isError && error?.status === 500 || error?.status === 401) {
+    return <p style={{ textAlign: "center" }}>Ошибка загрузки корзины</p>;
   }
-
   return (
     <div className="cart">
-      {cartItems.data === null || cartItems.data.length === 0 ? (
+      {cartItems == [] || cartItems?.data === null ? (
         <EmptyCart />
       ) : (
         <>
           <h1 className="cart__title">Корзина</h1>
           <div className="cart__container">
             <div>
-              {cartItems.data.map((item) => (
+              {cartItems?.data.map((item) => (
                 <CardCart
                   key={item.id}
                   product={item}
