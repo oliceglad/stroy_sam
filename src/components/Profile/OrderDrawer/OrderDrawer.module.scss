@@ -53,6 +53,7 @@
       width: 100%;
       display: flex;
       justify-content: space-between;
+      margin-bottom: 10px;
 
       & span {
         color: grey;
@@ -99,6 +100,68 @@
   &__buttonCancel {
     background-color: #f44336;
     color: white;
+  }
+
+  @media (max-width: 568px) {
+    width: 100%;
+    padding: 15px;
+
+    &__title {
+      font-size: 45px;
+      font-weight: bold;
+    }
+
+    &__info {
+      font-size: 24px;
+    }
+
+    &__status {
+      font-size: 30px;
+    }
+
+    &__close {
+      font-size: 50px;
+    }
+
+    &__items {
+      & li {
+        display: block;
+        margin-bottom: 25px;
+        & div {
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+      }
+
+      &__price {
+        font-weight: bold;
+      }
+    }
+
+    &__amount {
+      & h2 {
+        font-size: 24px;
+      }
+
+      & div {
+        font-size: 36px;
+      }
+    }
+
+    &__actions {
+      display: block;
+    }
+
+    &__button,
+    &__buttonCancel {
+      display: block;
+      width: 100%;
+      font-size: 24px;
+    }
+
+    &__button {
+      margin-bottom: 12px;
+    }
   }
 }
 

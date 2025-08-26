@@ -97,7 +97,7 @@ const OrderDrawer = ({ orderId, orderInfo, onClose }) => {
                   <div>
                     {item.product_name} <span>{item.quantity}шт.</span>
                   </div>
-                  {item.price} руб.
+                  <div className={styles.drawer__items__price}>{item.price} руб.</div>
                 </li>
               ))}
             </ul>
