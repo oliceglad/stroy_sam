@@ -38,19 +38,14 @@ const Breadcrumbs = () => {
     skip: !productId,
   });
 
-  // --- Ключевой фикс ---
-  // Для URL вида /categories/:categoryId/products/:productId
-  // нужно брать именно categoryId, а не "products"
   const categoryIdFromUrl = pathnames[0] === "categories" ? pathnames[1] : null;
 
   let categoryPath = [];
   if (categoriesTree) {
     if (product?.category_id) {
-      // если товар загрузился, берём его категорию
       categoryPath =
         findCategoryPath(categoriesTree, product.category_id) || [];
     } else if (categoryIdFromUrl) {
-      // fallback пока товар не подгрузился
       categoryPath = findCategoryPath(categoriesTree, categoryIdFromUrl) || [];
     }
   }
@@ -117,7 +112,6 @@ const Breadcrumbs = () => {
     }
   }
 
-  // Добавляем товар
   if (isProductPage && product?.product_name) {
     crumbs.push(
       <span key="sep-product" className={styles.separator}>
