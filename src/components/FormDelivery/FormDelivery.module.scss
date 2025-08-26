@@ -32,4 +32,33 @@
     display: flex;
     gap: 20px;
   }
+
+  @media (max-width: 1024px) {
+    &__title {
+      font-size: 36px;
+    }
+
+    &__name {
+      display: block;
+    }
+
+    & input {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 568px) {
+    &__title {
+      font-size: 36px;
+      font-weight: 500;
+    }
+
+    &__name {
+      display: block;
+    }
+
+    & input {
+      width: 100%;
+    }
+  }
 }

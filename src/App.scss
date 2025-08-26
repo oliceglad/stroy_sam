@@ -67,6 +67,18 @@
     display: flex;
     gap: 20px;
   }
+
+  @media (max-width: 1024px) {
+    display: block;
+
+    &__form {
+      width: 100%;
+    }
+
+    &__title {
+      font-size: 36px;
+    }
+  }
 }
 
 .statePage {
