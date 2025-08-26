@@ -16,46 +16,49 @@ import ProfilePage from "./pages/ProfilePage";
 import FailPage from "./pages/FailPage";
 import MainPage from "./pages/MainPage";
 import SubCategoriesPage from "./pages/SubCategoriesPage";
+import AuthProvider from "./providers/AuthProvider";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
-        <Breadcrumbs />
-        <div className="main-content">
-          <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="*" element={<Navigate to="/fail" replace />} />
-            <Route path="/cart" element={<CartPage />} />
-            <Route path="/delivery" element={<DeliveryPage />} />
-            <Route path="/success" element={<SuccessPage />} />
-            <Route path="/categories" element={<CategoriesPage />} />
-            <Route
-              path="/categories/:categoryId"
-              element={<SubCategoriesPage />}
-            />
-            <Route path="/fail" element={<FailPage />} />
-            <Route path="/" element={<MainPage />} />
-            <Route
-              path="/categories/:categoryId/products"
-              element={<CategoryProductsPage />}
-            />
-            <Route
-              path="/categories/:categoryId/products/:productId"
-              element={<ProductPage />}
-            />
-            <Route path="/products/search" element={<SearchResultsPage />} />
-            <Route
-              path="/products/search/:productId/"
-              element={<ProductPage />}
-            />
+        <AuthProvider>
+          <Header />
+          <Breadcrumbs />
+          <div className="main-content">
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="*" element={<Navigate to="/fail" replace />} />
+              <Route path="/cart" element={<CartPage />} />
+              <Route path="/delivery" element={<DeliveryPage />} />
+              <Route path="/success" element={<SuccessPage />} />
+              <Route path="/categories" element={<CategoriesPage />} />
+              <Route
+                path="/categories/:categoryId"
+                element={<SubCategoriesPage />}
+              />
+              <Route path="/fail" element={<FailPage />} />
+              <Route path="/" element={<MainPage />} />
+              <Route
+                path="/categories/:categoryId/products"
+                element={<CategoryProductsPage />}
+              />
+              <Route
+                path="/categories/:categoryId/products/:productId"
+                element={<ProductPage />}
+              />
+              <Route path="/products/search" element={<SearchResultsPage />} />
+              <Route
+                path="/products/search/:productId/"
+                element={<ProductPage />}
+              />
 
-            <Route path="/profile" element={<ProfilePage />} />
-          </Routes>
-        </div>
-        <Footer />
+              <Route path="/profile" element={<ProfilePage />} />
+            </Routes>
+          </div>
+          <Footer />
+        </AuthProvider>
       </BrowserRouter>
     </div>
   );

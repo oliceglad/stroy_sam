@@ -71,9 +71,9 @@ export const userApi = createApi({
       async onQueryStarted(_, { queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          Cookies.set("access_token", data.access_token);
+          Cookies.set("access", data.access_token);
           if (data.refresh_token) {
-            Cookies.set("refresh_token", data.refresh_token);
+            Cookies.set("refresh", data.refresh_token);
           }
         } catch {}
       },
