@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import s from "./Header.module.scss";
 import SearchInput from "../UI/SearchInput/SearchInput";
 import { Search } from "../UI/Search/Search";
 import { User } from "../UI/User/User";
 import { Cart } from "../UI/Cart/Cart";
-import { Catalog } from "../UI/Catalog/Catalog";
 import { useGetCartContentsQuery } from "../../api/cart";
 
 const Header = () => {
   const { data, isSuccess } = useGetCartContentsQuery();
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const cartCount =
     data?.data != null && isSuccess
@@ -32,6 +32,13 @@ const Header = () => {
       </div>
 
       <div className={s.header__right}>
+        <button
+          className={s.header__searchBtn}
+          onClick={() => setMobileSearchOpen((prev) => !prev)}
+        >
+          <Search className={s.header__icon} />
+        </button>
+
         <NavLink to="/cart" className={s.header__link}>
           <Cart className={s.header__icon} count={cartCount} />
         </NavLink>
@@ -40,6 +47,17 @@ const Header = () => {
           <User className={s.header__icon} />
         </NavLink>
       </div>
+      {mobileSearchOpen && (
+        <>
+          <div
+            className={s.header__overlay}
+            onClick={() => setMobileSearchOpen(false)}
+          />
+          <div className={s.header__mobileSearch}>
+            <SearchInput onSearchEnd={() => setMobileSearchOpen(false)} />
+          </div>
+        </>
+      )}
     </header>
   );
 };

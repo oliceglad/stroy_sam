@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
         <Breadcrumbs />
         <div className="main-content">
           <Routes>
