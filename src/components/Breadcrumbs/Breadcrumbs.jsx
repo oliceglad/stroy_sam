@@ -38,18 +38,21 @@ const Breadcrumbs = () => {
     skip: !productId,
   });
 
-  const categoryId =
-    pathnames[0] === "categories" ? pathnames[1] : null;
-  const subcategoryId =
-    pathnames[0] === "categories" &&
-    pathnames.includes("products") &&
-    pathnames.length > 2
-      ? pathnames[pathnames.length - 2]
-      : null;
+  // --- Ключевой фикс ---
+  // Для URL вида /categories/:categoryId/products/:productId
+  // нужно брать именно categoryId, а не "products"
+  const categoryIdFromUrl = pathnames[0] === "categories" ? pathnames[1] : null;
 
   let categoryPath = [];
-  if (categoriesTree && categoryId) {
-    categoryPath = findCategoryPath(categoriesTree, subcategoryId || categoryId) || [];
+  if (categoriesTree) {
+    if (product?.category_id) {
+      // если товар загрузился, берём его категорию
+      categoryPath =
+        findCategoryPath(categoriesTree, product.category_id) || [];
+    } else if (categoryIdFromUrl) {
+      // fallback пока товар не подгрузился
+      categoryPath = findCategoryPath(categoriesTree, categoryIdFromUrl) || [];
+    }
   }
 
   const crumbs = [
@@ -60,15 +63,21 @@ const Breadcrumbs = () => {
 
   if (pathnames.includes("categories")) {
     crumbs.push(
-      <span key="sep-cat" className={styles.separator}>›</span>,
-      <Link to="/categories" key="all-cats">Все категории</Link>
+      <span key="sep-cat" className={styles.separator}>
+        ›
+      </span>,
+      <Link to="/categories" key="all-cats">
+        Все категории
+      </Link>
     );
   }
 
   if (categoryPath.length > 0) {
     categoryPath.forEach((cat, idx) => {
       crumbs.push(
-        <span key={`sep-${cat.id}`} className={styles.separator}>›</span>,
+        <span key={`sep-${cat.id}`} className={styles.separator}>
+          ›
+        </span>,
         <Link
           key={`cat-${cat.id}`}
           to={
@@ -86,14 +95,20 @@ const Breadcrumbs = () => {
   if (pathnames[0] === "products" && pathnames[1] === "search") {
     if (pathnames.length === 2) {
       crumbs.push(
-        <span key="sep-search" className={styles.separator}>›</span>,
+        <span key="sep-search" className={styles.separator}>
+          ›
+        </span>,
         <span key="search">{query || "Поиск"}</span>
       );
     } else if (pathnames.length === 3) {
       crumbs.push(
-        <span key="sep-search" className={styles.separator}>›</span>,
+        <span key="sep-search" className={styles.separator}>
+          ›
+        </span>,
         <Link
-          to={`/products/search${query ? `?query=${encodeURIComponent(query)}` : ""}`}
+          to={`/products/search${
+            query ? `?query=${encodeURIComponent(query)}` : ""
+          }`}
           key="search-link"
         >
           {query || "Поиск"}
@@ -102,30 +117,39 @@ const Breadcrumbs = () => {
     }
   }
 
+  // Добавляем товар
   if (isProductPage && product?.product_name) {
     crumbs.push(
-      <span key="sep-product" className={styles.separator}>›</span>,
+      <span key="sep-product" className={styles.separator}>
+        ›
+      </span>,
       <span key="product">{product.product_name}</span>
     );
   }
 
   if (location.pathname === "/cart") {
     crumbs.push(
-      <span key="sep-cart" className={styles.separator}>›</span>,
+      <span key="sep-cart" className={styles.separator}>
+        ›
+      </span>,
       <span key="cart">Корзина</span>
     );
   }
 
   if (location.pathname === "/profile") {
     crumbs.push(
-      <span key="sep-prof" className={styles.separator}>›</span>,
+      <span key="sep-prof" className={styles.separator}>
+        ›
+      </span>,
       <span key="prof">Профиль</span>
     );
   }
 
   if (location.pathname === "/delivery") {
     crumbs.push(
-      <span key="sep-delivery" className={styles.separator}>›</span>,
+      <span key="sep-delivery" className={styles.separator}>
+        ›
+      </span>,
       <span key="delivery">Оформление доставки</span>
     );
   }

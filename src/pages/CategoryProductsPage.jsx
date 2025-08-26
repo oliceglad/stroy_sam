@@ -88,12 +88,14 @@ const CategoryProductsPage = () => {
 
   return (
     <div className="categoryProductPage">
-      <button
-        className="categoryProductPage__filtersBtn"
-        onClick={() => setIsFiltersOpen(true)}
-      >
-        Фильтры
-      </button>
+      {!noResults && (
+        <button
+          className="categoryProductPage__filtersBtn"
+          onClick={() => setIsFiltersOpen(true)}
+        >
+          Фильтры
+        </button>
+      )}
 
       <div className="categoryProductPage__body">
         {isFiltersOpen && (
