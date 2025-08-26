@@ -1,5 +1,6 @@
 .categoriesCard {
   max-width: 159px;
+  text-align: center;
   &__img {
     width: 150px;
     height: 150px;
@@ -43,6 +44,7 @@
   @media (max-width: 568px) {
     display: flex;
     align-items: center;
+    text-align: left;
     max-width: 100%;
 
     &__img {
