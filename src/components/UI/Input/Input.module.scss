@@ -8,7 +8,7 @@ $border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 
   .custom-input-label {
     font-weight: 600;
@@ -33,6 +33,17 @@ $border-radius: 10px;
 
     &:focus {
       box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  @media (max-width: 800px) {
+    & .custom-input-label {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    & .custom-input-field {
+      font-size: 24px;
     }
   }
 }

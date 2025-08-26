@@ -4,7 +4,7 @@
 
   &__container {
     display: flex;
-    padding: 10px 20px;
+    padding: 20px 10px;
     justify-content: space-between;
     align-items: flex-end;
 
@@ -52,6 +52,11 @@
           margin-right: 10px;
         }
       }
+    }
+
+
+    @media (max-width: 1024px) {
+      margin-right: 0px;
     }
   }
 
