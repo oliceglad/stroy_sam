@@ -222,6 +222,12 @@
     gap: 24px;
     flex-wrap: wrap;
   }
+
+  @media (max-width: 800px) {
+    &__content {
+      flex-direction: column;
+    }
+  }
 }
 
 .searchPage {

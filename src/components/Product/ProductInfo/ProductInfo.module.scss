@@ -22,19 +22,13 @@
     color: grey;
   }
 
-  &__button {
-    margin-top: 16px;
-    padding: 10px 20px;
-    background-color: #fcbd01;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: opacity 0.3s ease;
+  @media (max-width: 800px) {
+    &__desc {
+      font-size: 18px;
+    }
 
-    &:hover {
-      opacity: .7;
+    &__price {
+      font-size: 30px;
     }
   }
 }
