@@ -21,6 +21,11 @@
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 10px;
+
+    @media (max-width: 568px) {
+      font-size: 24px;
+      max-width: 80%;
+    }
   }
 
   &__phone {
@@ -56,10 +61,22 @@
     &__timer {
       color: #999;
     }
+
+    @media (max-width: 568px) {
+      flex-direction: column;
+      gap: 4px;
+    }
   }
 
   &__submit {
     margin-top: 20px;
+  }
+
+
+  @media (max-width: 568px) {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
   }
 }
 
@@ -74,4 +91,8 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+
+  @media (max-width: 568px) {
+    padding: 10px;
+  }
 }

@@ -32,13 +32,12 @@ const LoginPage = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await smsVerify({ phone }).unwrap();
-      console.log(response);
-      if (response.data.time) {
-        setTimer(response.data.time);
-      } else {
-        setTimer(30);
-      }
+      // const response = await smsVerify({ phone }).unwrap();
+      // if (response.data.time) {
+      //   setTimer(response.data.time);
+      // } else {
+      //   setTimer(30);
+      // }
 
       setModalOpen(true);
     } catch (err) {
