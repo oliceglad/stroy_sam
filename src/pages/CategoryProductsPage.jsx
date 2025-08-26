@@ -92,15 +92,17 @@ const CategoryProductsPage = () => {
   return (
     <div className="categoryProductPage">
       <div className="categoryProductPage__body">
-        <Filters
-          options={filterOptions}
-          selectedFilters={selectedFilters}
-          onToggle={handleToggleOption}
-          onApply={applyFilters}
-          onClear={clearFilters}
-          isApplying={isFiltering}
-          isLoading={isFilterOptionsLoading}
-        />
+        {noResults ? null : (
+          <Filters
+            options={filterOptions}
+            selectedFilters={selectedFilters}
+            onToggle={handleToggleOption}
+            onApply={applyFilters}
+            onClear={clearFilters}
+            isApplying={isFiltering}
+            isLoading={isFilterOptionsLoading}
+          />
+        )}
 
         <main className="categoryProductPage__content">
           {(isLoading || isFiltering) && (
