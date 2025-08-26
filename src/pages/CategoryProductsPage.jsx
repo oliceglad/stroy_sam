@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import {
   useGetProductsByCategoryIdQuery,
@@ -13,17 +13,12 @@ import { Loader } from "../components/UI/Loader/Loader";
 
 const CategoryProductsPage = () => {
   const { categoryId, subId } = useParams();
-  const navigate = useNavigate();
-
   const activeCategoryId = subId || categoryId;
 
-  const {
-    data: products,
-    isLoading: isLoadingCategoryProducts,
-    error,
-  } = useGetProductsByCategoryIdQuery(activeCategoryId, {
-    skip: !activeCategoryId,
-  });
+  const { data: products, isLoading: isLoadingCategoryProducts } =
+    useGetProductsByCategoryIdQuery(activeCategoryId, {
+      skip: !activeCategoryId,
+    });
 
   const { data: filterOptions, isLoading: isFilterOptionsLoading } =
     useGetFilterOptionsQuery(activeCategoryId, { skip: !activeCategoryId });
@@ -33,6 +28,7 @@ const CategoryProductsPage = () => {
 
   const [selectedFilters, setSelectedFilters] = useState({});
   const [filteredProducts, setFilteredProducts] = useState(null);
+  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
 
   useEffect(() => {
     setSelectedFilters({});
@@ -53,6 +49,7 @@ const CategoryProductsPage = () => {
       return cur;
     });
   };
+
   const applyFilters = async () => {
     if (!activeCategoryId) return;
 
@@ -91,18 +88,39 @@ const CategoryProductsPage = () => {
 
   return (
     <div className="categoryProductPage">
+      <button
+        className="categoryProductPage__filtersBtn"
+        onClick={() => setIsFiltersOpen(true)}
+      >
+        Фильтры
+      </button>
+
       <div className="categoryProductPage__body">
-        {noResults ? null : (
-          <Filters
-            options={filterOptions}
-            selectedFilters={selectedFilters}
-            onToggle={handleToggleOption}
-            onApply={applyFilters}
-            onClear={clearFilters}
-            isApplying={isFiltering}
-            isLoading={isFilterOptionsLoading}
+        {isFiltersOpen && (
+          <div
+            className="categoryProductPage__overlay"
+            onClick={() => setIsFiltersOpen(false)}
           />
         )}
+
+        <div
+          className={`categoryProductPage__filtersWrapper ${
+            isFiltersOpen ? "open" : ""
+          }`}
+        >
+          {!noResults && (
+            <Filters
+              options={filterOptions}
+              selectedFilters={selectedFilters}
+              onToggle={handleToggleOption}
+              onApply={applyFilters}
+              onClear={clearFilters}
+              isApplying={isFiltering}
+              isLoading={isFilterOptionsLoading}
+              onClose={() => setIsFiltersOpen(false)}
+            />
+          )}
+        </div>
 
         <main className="categoryProductPage__content">
           {(isLoading || isFiltering) && (

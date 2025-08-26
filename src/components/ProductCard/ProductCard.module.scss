@@ -126,6 +126,10 @@
     flex-direction: column;
     padding: 0px;
 
+    &__info {
+      margin-left: 0px;
+    }
+
     & img {
       width: 100%;
       object-fit: contain;

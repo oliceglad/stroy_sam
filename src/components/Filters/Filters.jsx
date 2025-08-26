@@ -11,7 +11,18 @@ const Filters = ({
   onClear,
   isApplying = false,
   isLoading = false,
+  onClose, // новый пропс
 }) => {
+  const handleApply = () => {
+    onApply();
+    if (onClose) onClose();
+  };
+
+  const handleClear = () => {
+    onClear();
+    if (onClose) onClose();
+  };
+
   return (
     <aside className={styles.filters}>
       {isLoading ? (
@@ -22,7 +33,9 @@ const Filters = ({
         <>
           {options.map((opt) => (
             <div key={opt.attribute_name} className={styles.filters__group}>
-              <div className={styles.filters__group__title}>{opt.attribute_name}</div>
+              <div className={styles.filters__group__title}>
+                {opt.attribute_name}
+              </div>
               <div className={styles.filters__group__options}>
                 {opt.attribute_value.map((val) => {
                   const checked =
@@ -42,14 +55,14 @@ const Filters = ({
           <div className={styles.filters__actions}>
             <button
               className={styles.filters__actions__applyBtn}
-              onClick={onApply}
+              onClick={handleApply}
               disabled={isApplying || isLoading}
             >
               {isApplying ? "Применение..." : "Применить"}
             </button>
             <button
               className={styles.filters__actions__clearBtn}
-              onClick={onClear}
+              onClick={handleClear}
               disabled={isApplying || isLoading}
             >
               Сбросить

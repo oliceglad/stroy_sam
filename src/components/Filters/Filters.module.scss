@@ -32,6 +32,7 @@
 
     &__applyBtn,
     &__clearBtn {
+      display: block;
       padding: 8px;
       border-radius: 6px;
       cursor: pointer;
@@ -48,6 +49,33 @@
 
     &__clearBtn {
       background-color: black;
+    }
+  }
+
+  @media (max-width: 568px) {
+    &__group {
+      &__title {
+        margin-bottom: 8px;
+        font-size: 25px;
+      }
+
+      &__options {
+        gap: 15px;
+      }
+    }
+
+    &__actions {
+      display: block;
+
+      &__applyBtn {
+        margin-bottom: 10px;
+      }
+
+      &__applyBtn,
+      &__clearBtn {
+        width: 100%;
+        font-size: 20px;
+      }
     }
   }
 }
