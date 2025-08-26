@@ -39,28 +39,30 @@ const InfoCart = ({
         <span>Итого к оплате:</span>
         <span>{totalPrice}₽</span>
       </div>
-      <button
-        className={styles["infoCart__checkoutButton"]}
-        onClick={handleGoButton}
-      >
-        {isLoading ? (
-          <Loader width={20} height={20}/>
-        ) : location.pathname === "/delivery" ? (
-          "Оформить заказ"
-        ) : (
-          "Перейти к оформлению"
-        )}
-      </button>
-
-      {location.pathname === "/cart" ? (
+      <div className={styles.infoCart__buttons}>
         <button
-          className={styles["infoCart__clearButton"]}
-          onClick={onClearCart}
-          type="button"
+          className={styles["infoCart__checkoutButton"]}
+          onClick={handleGoButton}
         >
-          Очистить корзину
+          {isLoading ? (
+            <Loader width={20} height={20} />
+          ) : location.pathname === "/delivery" ? (
+            "Оформить заказ"
+          ) : (
+            "Перейти к оформлению"
+          )}
         </button>
-      ) : null}
+
+        {location.pathname === "/cart" ? (
+          <button
+            className={styles["infoCart__clearButton"]}
+            onClick={onClearCart}
+            type="button"
+          >
+            Очистить корзину
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 };

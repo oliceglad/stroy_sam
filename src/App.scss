@@ -27,6 +27,15 @@
     justify-content: space-around;
     align-items: flex-start;
   }
+
+  @media (max-width: 1024px) {
+    &__container {
+      display: block;
+    }
+    &__title {
+      font-size: 36px;
+    }
+  }
 }
 
 .deliveryPage {
