@@ -3,10 +3,18 @@
   &__title {
     font-size: 24px;
     font-weight: bold;
+
+
+    & span {
+      cursor: pointer;
+      color: grey;
+      font-size: 16px;
+    }
   }
 
   &__list {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     margin-top: 30px;
   }
