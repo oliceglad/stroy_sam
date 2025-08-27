@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./NumberInput.module.scss";
+import styles from "./numberInput.module.scss";
 
 const NumberInput = ({ length = 6, onChange }) => {
   const [values, setValues] = useState(Array(length).fill(""));
