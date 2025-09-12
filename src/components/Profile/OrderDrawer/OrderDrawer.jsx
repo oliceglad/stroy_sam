@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {
   useGetOrderDetailQuery,
+  useGetOrderDeliveryInfoQuery,
   useCancelOrderMutation,
   useReorderMutation,
 } from "../../../api/orders";
 import styles from "./OrderDrawer.module.scss";
 import { Loader } from "../../UI/Loader/Loader";
+import DrawerDeliveryInfo from "./DrawerDeliveryInfo";
 
 const statusLabels = {
   CREATED: "Создан",
@@ -20,6 +22,9 @@ const statusLabels = {
 
 const OrderDrawer = ({ orderId, orderInfo, onClose }) => {
   const { data: order, isLoading, isError } = useGetOrderDetailQuery(orderId);
+  const { data: deliveryInfo, isLoading: isDeliveryLoading } =
+    useGetOrderDeliveryInfoQuery(orderId);
+
   const [cancelOrder] = useCancelOrderMutation();
   const [reorder] = useReorderMutation();
   const [visible, setVisible] = useState(false);
@@ -78,10 +83,7 @@ const OrderDrawer = ({ orderId, orderInfo, onClose }) => {
               className={styles.drawer__status}
               style={
                 orderInfo.order_status === "CANCELED"
-                  ? {
-                      borderColor: "red",
-                      color: "red",
-                    }
+                  ? { borderColor: "red", color: "red" }
                   : orderInfo.order_status === "COMPLETED"
                   ? { borderColor: "green" }
                   : {}
@@ -97,7 +99,9 @@ const OrderDrawer = ({ orderId, orderInfo, onClose }) => {
                   <div>
                     {item.product_name} <span>{item.quantity}шт.</span>
                   </div>
-                  <div className={styles.drawer__items__price}>{item.price} руб.</div>
+                  <div className={styles.drawer__items__price}>
+                    {item.price} руб.
+                  </div>
                 </li>
               ))}
             </ul>
@@ -111,7 +115,6 @@ const OrderDrawer = ({ orderId, orderInfo, onClose }) => {
               <button onClick={handleReorder} className={styles.drawer__button}>
                 Повторить заказ
               </button>
-
               {orderInfo.order_status === "CANCELED" ? null : (
                 <button
                   onClick={handleCancel}
@@ -121,6 +124,11 @@ const OrderDrawer = ({ orderId, orderInfo, onClose }) => {
                 </button>
               )}
             </div>
+
+            <DrawerDeliveryInfo
+              deliveryInfo={deliveryInfo}
+              isLoading={isDeliveryLoading}
+            />
           </>
         )}
       </div>

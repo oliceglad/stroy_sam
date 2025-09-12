@@ -18,8 +18,30 @@ const DeliveryPage = () => {
   };
 
   const handleCreateOrder = async () => {
+    const normalizePhone = (phone) => {
+      if (!phone) return "";
+      return phone.replace(/\D/g, "").slice(0, 15);
+    };
+
+    if (!formData) {
+      console.warn("Form data is empty — заполните данные доставки.");
+      return;
+    }
+
+    const payload = {
+      desired_delivery_at: formData.desired_delivery_at,
+      country: formData.country,
+      city: formData.city,
+      address: formData.address,
+      recipient_name: formData.recipient_name,
+      phone_primary: normalizePhone(formData.phone_primary),
+      phone_secondary: normalizePhone(formData.phone_secondary),
+      extra_info: formData.extra_info,
+    };
+
     try {
-      await createOrder().unwrap();
+      console.log("Отправляем заказ:", payload);
+      await createOrder(payload).unwrap();
       navigate("/success");
       window.location.reload();
     } catch (error) {

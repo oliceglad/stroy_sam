@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Input from "../UI/Input/input";
 import CustomSelect from "../UI/CustomSelect/CustomSelect";
 import DateInput from "../UI/DateInput/DateInput";
+import { useGetMeQuery } from "../../api/user";
 import s from "./FormDelivery.module.scss";
 
 const countryCityMap = {
@@ -11,22 +12,36 @@ const countryCityMap = {
 };
 
 const FormDelivery = ({ onChange }) => {
+  const { data: meData } = useGetMeQuery();
+
   const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
     country: "Россия",
     city: "Самара",
     address: "",
-    phone: "",
-    deliveryDate: "",
+    recipient_name: "",
+    phone_primary: "",
+    phone_secondary: "",
+    desired_delivery_at: "",
+    extra_info: "",
   });
+
+  useEffect(() => {
+    if (meData) {
+      const first = meData.first_name || "";
+      const last = meData.last_name || "";
+      setFormData((prev) => ({
+        ...prev,
+        recipient_name: `${first} ${last}`.trim(),
+        phone_primary: `+7${meData.phone || ""}`,
+        phone_secondary: `+7${prev.phone_secondary || ""}`,
+      }));
+    }
+  }, [meData]);
 
   const cityOptions = useMemo(() => {
     return countryCityMap[formData.country] || [];
   }, [formData.country]);
 
-  // Если выбранный город не принадлежит новой стране — сбросим на первый из списка
   useEffect(() => {
     if (!cityOptions.includes(formData.city)) {
       setFormData((prev) => ({
@@ -41,9 +56,10 @@ const FormDelivery = ({ onChange }) => {
   }, [formData, onChange]);
 
   const handleInputChange = (field) => (e) => {
+    const value = e?.target ? e.target.value : e;
     setFormData((prev) => ({
       ...prev,
-      [field]: e.target.value,
+      [field]: value,
     }));
   };
 
@@ -55,9 +71,14 @@ const FormDelivery = ({ onChange }) => {
   };
 
   const handleDateChange = (value) => {
+    let formatted = "";
+    if (!value) formatted = "";
+    else if (value instanceof Date)
+      formatted = value.toISOString().split("T")[0];
+    else formatted = value;
     setFormData((prev) => ({
       ...prev,
-      deliveryDate: value,
+      desired_delivery_at: formatted,
     }));
   };
 
@@ -68,29 +89,12 @@ const FormDelivery = ({ onChange }) => {
       <div className={s.formDelivery__section}>
         <h3>Информация о заказчике</h3>
         <Input
-          label="E-mail"
-          placeholder="Введите E-mail"
-          value={formData.email}
-          onChange={handleInputChange("email")}
-          name="email"
-          maskType="email"
+          label="Получатель (ФИО)"
+          placeholder="ФИО получателя"
+          value={formData.recipient_name}
+          onChange={handleInputChange("recipient_name")}
+          name="recipient_name"
         />
-        <div className={s.formDelivery__name}>
-          <Input
-            label="Имя"
-            placeholder="Введите имя"
-            value={formData.firstName}
-            onChange={handleInputChange("firstName")}
-            name="firstName"
-          />
-          <Input
-            label="Фамилия"
-            placeholder="Введите фамилию"
-            value={formData.lastName}
-            onChange={handleInputChange("lastName")}
-            name="lastName"
-          />
-        </div>
       </div>
 
       <div className={s.formDelivery__section}>
@@ -131,20 +135,37 @@ const FormDelivery = ({ onChange }) => {
         />
 
         <Input
-          label="Контактный номер"
+          label="Основной номер"
           placeholder="Введите номер телефона"
-          value={formData.phone}
-          onChange={handleInputChange("phone")}
-          name="phone"
+          value={formData.phone_primary}
+          onChange={handleInputChange("phone_primary")}
+          name="phone_primary"
+          maskType="phone"
+        />
+
+        <Input
+          label="Доп. номер"
+          placeholder="Доп. номер (необязательно)"
+          value={formData.phone_secondary}
+          onChange={handleInputChange("phone_secondary")}
+          name="phone_secondary"
           maskType="phone"
         />
 
         <DateInput
           label="Желаемая дата доставки"
-          value={formData.deliveryDate}
+          value={formData.desired_delivery_at}
           onChange={handleDateChange}
           placeholder="Выберите дату"
           style={{ marginTop: "7px" }}
+        />
+
+        <Input
+          label="Комментарий к доставке"
+          placeholder="Например: код домофона, этаж и т.п."
+          value={formData.extra_info}
+          onChange={handleInputChange("extra_info")}
+          name="extra_info"
         />
       </div>
     </>

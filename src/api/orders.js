@@ -14,7 +14,8 @@ export const ordersApi = createApi({
         if (start_date) params.append("start_date", start_date);
         if (end_date) params.append("end_date", end_date);
         if (status) params.append("status", status);
-        return `?${params.toString()}`;
+        const queryStr = params.toString();
+        return queryStr ? `?${queryStr}` : "";
       },
       providesTags: ["Orders"],
     }),
@@ -24,10 +25,16 @@ export const ordersApi = createApi({
       providesTags: (result, error, id) => [{ type: "Order", id }],
     }),
 
+    getOrderDeliveryInfo: builder.query({
+      query: (orderId) => `/info_delivery/${orderId}`,
+      providesTags: (result, error, id) => [{ type: "Order", id }],
+    }),
+
     createOrder: builder.mutation({
-      query: () => ({
+      query: (body) => ({
         url: "/checkout",
         method: "POST",
+        body,
       }),
       invalidatesTags: ["Orders"],
     }),
@@ -53,6 +60,7 @@ export const ordersApi = createApi({
 export const {
   useGetUserOrdersQuery,
   useGetOrderDetailQuery,
+  useGetOrderDeliveryInfoQuery,
   useCreateOrderMutation,
   useCancelOrderMutation,
   useReorderMutation,
