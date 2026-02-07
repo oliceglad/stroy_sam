@@ -1,0 +1,24 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.heroSkeleton {
+  margin: 30px auto;
+  max-width: 1368px;
+  width: 100%;
+  padding: 0 20px;
+  height: 485px; // Approximate height of the banner
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 12px;
+
+  @media (max-width: 800px) {
+    height: 350px;
+  }
+}

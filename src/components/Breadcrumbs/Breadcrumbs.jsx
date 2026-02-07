@@ -148,7 +148,56 @@ const Breadcrumbs = () => {
     );
   }
 
-  return <div className={styles.breadcrumbs}>{crumbs}</div>;
+  if (location.pathname === "/contacts") {
+    crumbs.push(
+      <span key="sep-contacts" className={styles.separator}>
+        ›
+      </span>,
+      <span key="contacts">Контакты</span>
+    );
+  }
+
+  if (location.pathname === "/data-policy") {
+    crumbs.push(
+      <span key="sep-data-policy" className={styles.separator}>
+        ›
+      </span>,
+      <span key="data-policy">Политика обработки персональных данных</span>
+    );
+  }
+
+  if (location.pathname === "/sales-rules") {
+    crumbs.push(
+      <span key="sep-sales-rules" className={styles.separator}>
+        ›
+      </span>,
+      <span key="sales-rules">Правила продажи</span>
+    );
+  }
+
+  if (location.pathname === "/rec-tech-rules") {
+    crumbs.push(
+      <span key="sep-rec-tech-rules" className={styles.separator}>
+        ›
+      </span>,
+      <span key="rec-tech-rules">Правила применения рекомендательных технологий</span>
+    );
+  }
+
+  if (location.pathname === "/public-offer") {
+    crumbs.push(
+      <span key="sep-public-offer" className={styles.separator}>
+        ›
+      </span>,
+      <span key="public-offer">Публичная оферта</span>
+    );
+  }
+
+  return (
+    <div className={styles.breadcrumbs}>
+      <div className={styles.breadcrumbs__container}>{crumbs}</div>
+    </div>
+  );
 };
 
 export default Breadcrumbs;

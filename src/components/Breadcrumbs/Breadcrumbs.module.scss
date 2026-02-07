@@ -1,8 +1,15 @@
 .breadcrumbs {
-  padding: 10px 24px;
+  padding: 10px 0; // Removed horizontal padding
   background-color: #f9f9f9;
   font-size: 14px;
   color: #333;
+
+  &__container {
+    max-width: 1368px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
   a {
     color: black;

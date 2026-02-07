@@ -1,0 +1,36 @@
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+.mainPageSkeleton {
+    &__content {
+        max-width: 1368px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    &__categories {
+        margin-top: 25px;
+    }
+
+    &__title {
+        width: 300px;
+        height: 32px;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 4px;
+        margin-bottom: 30px;
+    }
+
+    &__grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+}

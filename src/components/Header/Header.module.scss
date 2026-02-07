@@ -1,9 +1,21 @@
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
+  // display: flex; REMOVED
+  // justify-content: space-between; REMOVED
+  // align-items: center; REMOVED
+  padding: 10px 0; // Removed horizontal padding, kept vertical
   background-color: #fff;
+  border-bottom: 1px solid #ededed;
+  position: relative;
+
+  &__container {
+    max-width: 1368px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   border-bottom: 1px solid #ededed;
   position: relative;
 
@@ -27,6 +39,21 @@
       &:not(:last-child) {
         margin-right: 10px;
       }
+    }
+  }
+
+  &__loginBtn {
+    padding: 8px 16px; // More padding for text
+    font-weight: 600;
+    color: #1C1B1B; // Ensure text color is visible
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px; // Match icon height roughly (32px icon + 5px padding*2 = 42px)
+    box-sizing: border-box;
+    
+    &:hover {
+      background-color: #e6f2f5;
     }
   }
 
@@ -55,10 +82,36 @@
     flex-grow: 1;
     display: flex;
     justify-content: center;
+    align-items: center; // Align items vertically
 
     @media (max-width: 800px) {
       display: none;
     }
+  }
+
+  &__catalogBtn {
+    background-color: #fcbd01;
+    border-radius: 30px; // Match search wrapper
+    padding: 8px 16px; // Reduced padding
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #1C1B1B;
+    font-weight: 600;
+    margin-right: 15px;
+    height: 40px; // Reduced height
+    box-sizing: border-box;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #e5ac00;
+    }
+  }
+  
+  &__catalogIcon {
+    width: 20px;
+    height: 20px;
   }
 
   &__searchWrapper {

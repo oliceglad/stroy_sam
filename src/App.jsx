@@ -3,6 +3,7 @@ import "./App.scss";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import Header from "./components/Header/Header";
+import TopHeader from "./components/TopHeader/TopHeader";
 import Footer from "./components/Footer/Footer";
 import CartPage from "./pages/CartPage";
 import DeliveryPage from "./pages/DeliveryPage";
@@ -17,12 +18,19 @@ import FailPage from "./pages/FailPage";
 import MainPage from "./pages/MainPage";
 import SubCategoriesPage from "./pages/SubCategoriesPage";
 import AuthProvider from "./providers/AuthProvider";
+import FavoritesPage from "./pages/FavoritesPage";
+import ContactsPage from "./pages/ContactsPage";
+import DataPolicyPage from "./pages/documents/DataPolicyPage";
+import SalesRulesPage from "./pages/documents/SalesRulesPage";
+import RecTechRulesPage from "./pages/documents/RecTechRulesPage";
+import PublicOfferPage from "./pages/documents/PublicOfferPage";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <AuthProvider>
+          <TopHeader />
           <Header />
           <Breadcrumbs />
           <div className="main-content">
@@ -55,6 +63,13 @@ function App() {
               />
 
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/favorites" element={<FavoritesPage />} />
+              <Route path="/contacts" element={<ContactsPage />} />
+              
+              <Route path="/data-policy" element={<DataPolicyPage />} />
+              <Route path="/sales-rules" element={<SalesRulesPage />} />
+              <Route path="/rec-tech-rules" element={<RecTechRulesPage />} />
+              <Route path="/public-offer" element={<PublicOfferPage />} />
             </Routes>
           </div>
           <Footer />

@@ -1,0 +1,153 @@
+.topHeader {
+  background-color: #fff; 
+  color: #1C1B1B;
+  border-bottom: 1px solid #ededed;
+  padding: 8px 0;
+  font-size: 14px;
+
+  &__container {
+    max-width: 1368px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 800px) {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: #1C1B1B;
+    font-weight: 600;
+
+    &:hover {
+        color: #007bff;
+        text-decoration: underline;
+    }
+  }
+
+  &__callbackBtn {
+    background-color: #fcbd01;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1C1B1B;
+    transition: all 0.2s;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: #e5ac00; // Slightly darker on hover
+        color: #1C1B1B;
+    }
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+  }
+
+  &__address {
+    opacity: 0.9;
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 1;
+        text-decoration: underline;
+    }
+  }
+
+  &__schedule {
+    opacity: 0.8;
+  }
+
+  &__phoneWrapper {
+    position: relative;
+    cursor: pointer;
+    
+    &:hover .topHeader__dropdown {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+
+  &__phone {
+    font-weight: bold;
+    color: #1C1B1B;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+  }
+
+  &__dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 100;
+    min-width: 150px;
+    margin-top: 5px;
+
+    // Animation
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+}
+
+.socialParams {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &__item {
+        margin-bottom: 8px;
+        
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        padding: 5px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    }
+}

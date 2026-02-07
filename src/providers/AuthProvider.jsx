@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRefreshTokenMutation } from "../api/user";
-import { Loader } from "../components/UI/Loader/Loader";
+import { MainPageSkeleton } from "../pages/MainPageSkeleton";
 
 const AuthProvider = ({ children }) => {
   const [refreshToken] = useRefreshTokenMutation();
@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
   }, [refreshToken]);
 
   if (loading) {
-    return <Loader />;
+    return <MainPageSkeleton />;
   }
 
   return children;

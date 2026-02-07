@@ -2,8 +2,8 @@ import React from "react";
 import { useGetMainCategoriesQuery } from "../../api/categories";
 import styles from "./PopularCategories.module.scss";
 import { CategoryCard } from "../Categories/CategoriesCard";
-import { Loader } from "../UI/Loader/Loader";
 import { useNavigate } from "react-router-dom";
+import { CategorySkeleton } from "../Categories/CategorySkeleton";
 
 const PopularCategories = () => {
   const { data: categories, isLoading } = useGetMainCategoriesQuery();
@@ -14,11 +14,14 @@ const PopularCategories = () => {
       <h2 className={styles.popularCategories__title}>
         Популярные категории <span onClick={() => navigate("/categories")}>Все категории</span>
       </h2>
-      {isLoading && <Loader />}
       <div className={styles.popularCategories__list}>
-        {categories?.slice(0, 7).map((cat) => (
-          <CategoryCard key={cat.id} category={cat} />
-        ))}
+        {isLoading
+          ? Array(7)
+              .fill(0)
+              .map((_, i) => <CategorySkeleton key={i} />)
+          : categories?.slice(0, 7).map((cat) => (
+              <CategoryCard key={cat.id} category={cat} />
+            ))}
       </div>
     </div>
   );

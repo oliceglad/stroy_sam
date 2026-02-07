@@ -1,43 +1,73 @@
-.whyus {
-  margin-top: 25px;
-  h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: bold;
-  }
-}
+.benefits {
+    margin: 40px auto;
+    max-width: 1368px;
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  width: 100%;
-}
+    &__title {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: left;
+    }
 
-.card {
-  background: #fafafa;
-  padding: 40px 30px;
-  border-radius: 16px;
-  text-align: center;
-  transition: 0.3s;
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
 
-.icon {
-  font-size: 48px;
-  margin-bottom: 15px;
-}
+        @media (max-width: 800px) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
 
-h3 {
-  font-size: 22px;
-  margin-bottom: 10px;
-}
+        @media (max-width: 500px) {
+            grid-template-columns: 1fr;
+        }
+    }
 
-p {
-  color: #555;
-  font-size: 16px;
-  line-height: 1.4;
+    &__card {
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; // Changed to flex-start
+        text-align: left; // Changed to left
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #f0f0f0;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+    }
+
+    &__imageWrapper {
+        width: 80px; // Slightly smaller icon wrapper
+        height: 80px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    &__cardTitle {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1C1B1B;
+        margin: 0 0 10px 0; // Added bottom margin
+    }
+
+    &__cardDesc {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.5;
+        margin: 0;
+    }
 }

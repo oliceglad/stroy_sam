@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Input from "../../components/UI/Input/input";
 import Button from "../../components/UI/Button/button";
 import { useSmsVerificationMutation } from "../../api/user";
@@ -57,6 +58,10 @@ const LoginPage = () => {
       <Button onClick={handleSubmit} disabled={phone.length < 10}>
         Войти
       </Button>
+
+      <Link to="/register" className="auth__link">
+        Нет аккаунта? Зарегистрироваться
+      </Link>
 
       {modalOpen && (
         <VerificationModal

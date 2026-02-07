@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Input from "../../components/UI/Input/input";
 import Button from "../../components/UI/Button/button";
 import {
@@ -93,6 +94,10 @@ const RegisterPage = () => {
         style={{ marginBottom: "20px" }}
       />
       <Button onClick={handleSubmit}>Зарегистрироваться</Button>
+
+      <Link to="/login" className="auth__link">
+        Уже есть аккаунт? Войти
+      </Link>
 
       {isVerificationOpen && (
         <VerificationModal
