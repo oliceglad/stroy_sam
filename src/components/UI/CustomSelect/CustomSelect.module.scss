@@ -8,8 +8,9 @@
 
 .selected {
   padding: 8px 12px;
+  height: 44px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -22,6 +23,17 @@
 .selected:focus {
   border-color: #888;
   outline: none;
+}
+
+.errorField {
+  border: 1px solid red !important;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  display: block;
+  margin-top: 4px;
 }
 
 .arrow {

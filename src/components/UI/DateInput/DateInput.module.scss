@@ -1,15 +1,34 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .dateInput {
-  padding: 5px;
+  padding: 12px;
+  height: 44px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 14px;
   outline: none;
-  transition: border-color 0.2s ease;
-  width: 150px;
+  transition: box-shadow 0.2s;
+  width: 100%;
+  background-color: #fff;
+  color: #333;
+  font-family: "Inter", sans-serif;
 
   &:focus {
-    border-color: #4a90e2;
-    box-shadow: 0 0 4px rgba(74, 144, 226, 0.5);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__label {
@@ -27,4 +46,14 @@
   @media (max-width: 568px) {
     margin-bottom: 10px;
   }
+}
+
+.errorField {
+  border: 1px solid red !important;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  margin-top: -2px;
 }

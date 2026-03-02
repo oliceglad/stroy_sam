@@ -11,7 +11,7 @@ const countryCityMap = {
   Беларусь: ["Минск", "Гомель", "Брест"],
 };
 
-const FormDelivery = ({ onChange }) => {
+const FormDelivery = ({ onChange, errors = {}, showErrors = false }) => {
   const { data: meData } = useGetMeQuery();
 
   const [formData, setFormData] = useState({
@@ -94,6 +94,7 @@ const FormDelivery = ({ onChange }) => {
           value={formData.recipient_name}
           onChange={handleInputChange("recipient_name")}
           name="recipient_name"
+          error={showErrors && errors.recipient_name}
         />
       </div>
 
@@ -111,6 +112,7 @@ const FormDelivery = ({ onChange }) => {
           }))}
           classSelect={s.formDelivery__select}
           classSelected={s.formDelivery__selected}
+          error={showErrors && errors.country}
         />
 
         <CustomSelect
@@ -124,6 +126,7 @@ const FormDelivery = ({ onChange }) => {
           }))}
           classSelect={s.formDelivery__select}
           classSelected={s.formDelivery__selected}
+          error={showErrors && errors.city}
         />
 
         <Input
@@ -132,6 +135,7 @@ const FormDelivery = ({ onChange }) => {
           value={formData.address}
           onChange={handleInputChange("address")}
           name="address"
+          error={showErrors && errors.address}
         />
 
         <Input
@@ -141,6 +145,7 @@ const FormDelivery = ({ onChange }) => {
           onChange={handleInputChange("phone_primary")}
           name="phone_primary"
           maskType="phone"
+          error={showErrors && errors.phone_primary}
         />
 
         <Input
@@ -158,6 +163,7 @@ const FormDelivery = ({ onChange }) => {
           onChange={handleDateChange}
           placeholder="Выберите дату"
           style={{ marginTop: "7px" }}
+          error={showErrors && errors.desired_delivery_at}
         />
 
         <Input

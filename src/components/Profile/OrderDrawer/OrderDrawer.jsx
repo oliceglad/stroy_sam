@@ -9,6 +9,65 @@ import styles from "./OrderDrawer.module.scss";
 import { Loader } from "../../UI/Loader/Loader";
 import DrawerDeliveryInfo from "./DrawerDeliveryInfo";
 
+const STATUS_STEPS = [
+  "CREATED",
+  "PROCESSING",
+  "CONFIRMED",
+  "PAID",
+  "COMPLETED"
+];
+
+const getStepIndex = (status) => {
+  if (status === "OPERATOR_PROCESSED") return 1;
+  if (status === "AWAITING_PAYMENT") return 2;
+  return STATUS_STEPS.indexOf(status);
+};
+
+const OrderProgressBar = ({ status }) => {
+  if (status === "CANCELED") {
+    return (
+      <div className={styles.progressBar}>
+        <div className={styles.progressBar__canceled}>Заказ отменён</div>
+      </div>
+    );
+  }
+
+  const currentStep = getStepIndex(status);
+
+  return (
+    <div className={styles.progressBar}>
+      {STATUS_STEPS.map((step, index) => {
+        const isCompleted = index <= currentStep;
+        return (
+          <div
+            key={step}
+            className={`${styles.progressBar__step} ${
+              isCompleted ? styles.progressBar__stepCompleted : ""
+            }`}
+          >
+            <div className={styles.progressBar__indicator}></div>
+            <div className={styles.progressBar__label}>
+              {statusLabels[step === "CONFIRMED" && status === "AWAITING_PAYMENT" ? "AWAITING_PAYMENT" : step]}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const SkeletonDrawerContent = () => (
+  <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <div className="skeleton" style={{ width: "200px", height: "32px" }} />
+    <div className="skeleton" style={{ width: "150px", height: "16px" }} />
+    <div className="skeleton" style={{ width: "100%", height: "60px", borderRadius: "10px" }} />
+    <div className="skeleton" style={{ width: "80px", height: "24px" }} />
+    <div className="skeleton" style={{ width: "100%", height: "40px" }} />
+    <div className="skeleton" style={{ width: "100%", height: "40px" }} />
+    <div className="skeleton" style={{ width: "100%", height: "100px", borderRadius: "10px" }} />
+  </div>
+);
+
 const statusLabels = {
   CREATED: "Создан",
   PROCESSING: "В обработке",
@@ -64,33 +123,18 @@ const OrderDrawer = ({ orderId, orderInfo, onClose }) => {
         <button className={styles.drawer__close} onClick={handleClose}>
           ×
         </button>
-        {isLoading && (
-          <div style={{ textAlign: "center" }}>
-            <Loader />
-          </div>
-        )}
-        {isError && (
+        {isLoading ? (
+          <SkeletonDrawerContent />
+        ) : isError ? (
           <div style={{ textAlign: "center" }}>Ошибка загрузки заказа</div>
-        )}
-        {order && (
+        ) : order ? (
           <>
             <h2 className={styles.drawer__title}>Заказ #{orderInfo.id}</h2>
             <div className={styles.drawer__info}>
               {new Date(orderInfo.order_date).toLocaleString()}
             </div>
 
-            <div
-              className={styles.drawer__status}
-              style={
-                orderInfo.order_status === "CANCELED"
-                  ? { borderColor: "red", color: "red" }
-                  : orderInfo.order_status === "COMPLETED"
-                  ? { borderColor: "green" }
-                  : {}
-              }
-            >
-              {statusLabels[orderInfo.order_status]}
-            </div>
+            <OrderProgressBar status={orderInfo.order_status} />
 
             <h3 className={styles.drawer__subtitle}>Товары:</h3>
             <ul className={styles.drawer__items}>
@@ -130,7 +174,7 @@ const OrderDrawer = ({ orderId, orderInfo, onClose }) => {
               isLoading={isDeliveryLoading}
             />
           </>
-        )}
+        ) : null}
       </div>
     </div>
   );

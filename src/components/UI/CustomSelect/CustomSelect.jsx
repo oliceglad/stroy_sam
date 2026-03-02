@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./CustomSelect.module.scss";
 
-const CustomSelect = ({selectTitle, options, value, onChange, placeholder, classSelect = "", classSelected = ""}) => {
+const CustomSelect = ({selectTitle, options, value, onChange, placeholder, classSelect = "", classSelected = "", error = ""}) => {
   const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
 
@@ -25,7 +25,7 @@ const CustomSelect = ({selectTitle, options, value, onChange, placeholder, class
       tabIndex={0}
     >
       <div
-        className={`${styles.selected} ${classSelected}`}
+        className={`${styles.selected} ${classSelected} ${error ? styles.errorField : ""}`}
         onClick={() => setIsOpen((prev) => !prev)}
         role="button"
         aria-haspopup="listbox"
@@ -34,6 +34,7 @@ const CustomSelect = ({selectTitle, options, value, onChange, placeholder, class
         {selectedLabel}
         <span className={styles.arrow}>&#9662;</span>
       </div>
+      {error && <span className={styles.errorMessage}>{error}</span>}
 
       {isOpen && (
         <ul className={styles.options} role="listbox">

@@ -1,52 +1,57 @@
 .orderFilters {
-  border-radius: 8px;
-  margin-bottom: 16px;
+  background-color: #fff;
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 24px;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
   align-items: flex-end;
+  gap: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
 
   & button {
-    padding: 8px 16px;
+    padding: 10px 20px;
     font-size: 14px;
-    border-radius: 4px;
+    font-weight: 600;
+    border-radius: 8px;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
 
   &__button {
     background-color: #fcbd01;
-    border: 1px solid #fcbd01;
-    color: white;
+    border: 2px solid #fcbd01;
+    color: #1c1b1b;
+    height: 44px;
 
     &:hover {
-      opacity: 0.7;
+      background-color: #e5ac00;
+      border-color: #e5ac00;
     }
   }
 
   &__delete {
     background-color: transparent;
-    color: red;
-    border: 1px solid red;
+    color: #e53e3e;
+    border: 2px solid #e53e3e;
+    height: 44px;
 
     &:hover {
-      background-color: red;
+      background-color: #e53e3e;
       color: white;
     }
   }
 
   @media (max-width: 568px) {
-    display: block;
+    padding: 12px;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 
     & button {
-      margin-top: 10px;
-      padding: 8px 16px;
-      font-size: 14px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    &__button {
-      margin-right: 10px;
+      width: 100%;
     }
   }
 }

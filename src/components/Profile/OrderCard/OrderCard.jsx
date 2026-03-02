@@ -12,12 +12,26 @@ const statusLabels = {
   CANCELED: "Отменён",
 };
 
+const getStatusColorClass = (status) => {
+  switch (status) {
+    case "CREATED": return styles.statusCreated;
+    case "PROCESSING":
+    case "OPERATOR_PROCESSED": return styles.statusProcessing;
+    case "CONFIRMED":
+    case "AWAITING_PAYMENT": return styles.statusWarning;
+    case "PAID": return styles.statusPaid;
+    case "COMPLETED": return styles.statusCompleted;
+    case "CANCELED": return styles.statusCanceled;
+    default: return "";
+  }
+};
+
 const OrderCard = ({ order, onClick }) => {
   return (
     <div className={styles.orderCard} onClick={() => onClick(order.id)}>
       <div className={styles.orderCard__header}>
         <span className={styles.orderCard__id}>Заказ #{order.id}</span>
-        <span className={styles.orderCard__status}>
+        <span className={`${styles.orderCard__status} ${getStatusColorClass(order.order_status)}`}>
           {statusLabels[order.order_status] || order.order_status}
         </span>
       </div>

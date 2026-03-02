@@ -24,6 +24,7 @@ const Input = ({
   style = {},
   inputProps = {},
   maskType = null,
+  error = "",
 }) => {
   const handleChange = (e) => {
     let newValue = e.target.value;
@@ -45,12 +46,13 @@ const Input = ({
       {label && <label className={styles["custom-input-label"]}>{label}</label>}
       <input
         type={inputType}
-        className={styles["custom-input-field"]}
+        className={`${styles["custom-input-field"]} ${error ? styles["error-field"] : ""}`}
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
         {...inputProps}
       />
+      {error && <span className={styles["error-message"]}>{error}</span>}
     </div>
   );
 };

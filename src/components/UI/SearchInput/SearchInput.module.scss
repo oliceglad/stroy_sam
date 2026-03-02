@@ -11,15 +11,17 @@
 
   &__dropdown {
     position: absolute;
-    top: 120%;
+    top: 100%;
+    margin-top: 8px;
     left: 0;
-    z-index: 10;
+    z-index: 2000;
     width: 100%;
     background: white;
-    border-top: none;
-    max-height: 200px;
+    max-height: 250px;
     border-radius: 10px;
     overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ededed;
 
     &__item {
       padding: 10px;

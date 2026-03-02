@@ -28,13 +28,94 @@
   }
 
   &__status {
-    display: inline-block;
-    width: min-content;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    padding: 5px;
-    border: 1px solid black;
+    display: none; // Used to be status pill, but now we use progress bar
+  }
+
+  /* Progress Bar */
+  .progressBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 30px 0;
+    position: relative;
+    width: 100%;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: #eee;
+      z-index: 1;
+      border-radius: 2px;
+    }
+
+    &__step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      flex: 1;
+    }
+
+    &__indicator {
+      width: 24px;
+      height: 24px;
+      background-color: #eee;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      transition: background-color 0.3s ease;
+    }
+
+    &__label {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+      line-height: 1.2;
+      max-width: 60px;
+    }
+
+    &__stepCompleted {
+      /* Fill line behind indicator */
+      &::before {
+        content: "";
+        position: absolute;
+        top: 10px;
+        right: 50%; /* Go backwards to previous step */
+        width: 100%;
+        height: 4px;
+        background-color: #2f855a;
+        z-index: -1;
+      }
+
+      /* First element shouldn't have trailing line */
+      &:first-child::before {
+        display: none;
+      }
+
+      .progressBar__indicator {
+        background-color: #2f855a;
+      }
+
+      .progressBar__label {
+        color: #2f855a;
+        font-weight: 600;
+      }
+    }
+
+    &__canceled {
+      width: 100%;
+      padding: 12px;
+      background-color: #fed7d7;
+      color: #c53030;
+      text-align: center;
+      border-radius: 8px;
+      font-weight: 600;
+    }
   }
 
   &__close {

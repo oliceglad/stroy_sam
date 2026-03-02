@@ -61,7 +61,10 @@ const SearchInput = ({ onSearchEnd }) => {
           {suggestions.map((item) => (
             <li
               key={item.id}
-              onClick={() => handleSelect(item)}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                handleSelect(item);
+              }}
               className={styles.searchInput__dropdown__item}
             >
               {item.product_name}

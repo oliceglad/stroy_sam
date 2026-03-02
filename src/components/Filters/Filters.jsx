@@ -23,6 +23,10 @@ const Filters = ({
     if (onClose) onClose();
   };
 
+  const hasSelectedFilters = Object.values(selectedFilters || {}).some(
+    (arr) => Array.isArray(arr) && arr.length > 0
+  );
+
   return (
     <aside className={styles.filters}>
       {isLoading ? (
@@ -60,13 +64,15 @@ const Filters = ({
             >
               {isApplying ? "Применение..." : "Применить"}
             </button>
-            <button
-              className={styles.filters__actions__clearBtn}
-              onClick={handleClear}
-              disabled={isApplying || isLoading}
-            >
-              Сбросить
-            </button>
+            {hasSelectedFilters && (
+              <button
+                className={styles.filters__actions__clearBtn}
+                onClick={handleClear}
+                disabled={isApplying || isLoading}
+              >
+                Сбросить
+              </button>
+            )}
           </div>
         </>
       )}

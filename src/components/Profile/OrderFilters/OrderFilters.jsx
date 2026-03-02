@@ -34,6 +34,8 @@ const OrderFilters = ({ onFilter }) => {
     onFilter({});
   };
 
+  const hasFilters = startDate || endDate || status;
+
   return (
     <div className={styles.orderFilters}>
       <DateInput
@@ -61,12 +63,14 @@ const OrderFilters = ({ onFilter }) => {
       >
         Применить
       </button>
-      <button
-        onClick={handleResetFilters}
-        className={styles.orderFilters__delete}
-      >
-        Сбросить фильтры
-      </button>
+      {hasFilters && (
+        <button
+          onClick={handleResetFilters}
+          className={styles.orderFilters__delete}
+        >
+          Сбросить фильтры
+        </button>
+      )}
     </div>
   );
 };

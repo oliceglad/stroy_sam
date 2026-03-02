@@ -23,10 +23,35 @@
 
   &__status {
     font-size: 14px;
-    color: #777;
-    background-color: #f0f0f0;
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+
+  /* Status Colors */
+  .statusCreated {
+    color: #4a5568;
+    background-color: #edf2f7;
+  }
+  .statusProcessing {
+    color: #2b6cb0;
+    background-color: #ebf8ff;
+  }
+  .statusWarning {
+    color: #c05621;
+    background-color: #feebc8;
+  }
+  .statusPaid {
+    color: #319795;
+    background-color: #e6fffa;
+  }
+  .statusCompleted {
+    color: #2f855a;
+    background-color: #c6f6d5;
+  }
+  .statusCanceled {
+    color: #c53030;
+    background-color: #fed7d7;
   }
 
   &__info {
