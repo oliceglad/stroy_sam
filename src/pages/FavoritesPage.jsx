@@ -3,7 +3,6 @@ import { useGetFavoritesContentsQuery } from "../api/favorites";
 import { useGetMeQuery } from "../api/user";
 import ProductCard from "../components/ProductCard/ProductCard";
 import FavoritesPageSkeleton from "./FavoritesPageSkeleton";
-import { Loader } from "../components/UI/Loader/Loader";
 
 const FavoritesPage = () => {
   const { data: user, isError: userError } = useGetMeQuery();

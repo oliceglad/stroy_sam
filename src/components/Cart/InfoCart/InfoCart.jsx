@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./InfoCart.module.scss";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Loader } from "../../UI/Loader/Loader";
+
 
 const InfoCart = ({
   items,
@@ -45,7 +45,7 @@ const InfoCart = ({
           onClick={handleGoButton}
         >
           {isLoading ? (
-            <Loader width={20} height={20} />
+            <span>Подождите...</span>
           ) : location.pathname === "/delivery" ? (
             "Оформить заказ"
           ) : (

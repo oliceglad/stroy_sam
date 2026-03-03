@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Filters.module.scss";
-import { Loader } from "../UI/Loader/Loader";
 import CustomCheckbox from "../UI/CustomCheckbox/CustomCheckbox";
 
 const Filters = ({

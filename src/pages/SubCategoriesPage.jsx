@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetSubcategoriesQuery } from "../api/categories";
 import { CategoryCard } from "../components/Categories/CategoriesCard";
-import { Loader } from "../components/UI/Loader/Loader";
+
 
 const SubCategoriesPage = () => {
   const { categoryId } = useParams();
@@ -15,8 +15,8 @@ const SubCategoriesPage = () => {
 
   if (isLoading)
     return (
-      <div style={{ textAlign: "center" }}>
-        <Loader />
+      <div style={{ textAlign: "center", padding: "40px" }}>
+        Загрузка...
       </div>
     );
 

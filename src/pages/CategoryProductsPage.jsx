@@ -9,7 +9,6 @@ import {
 
 import ProductCard from "../components/ProductCard/ProductCard";
 import Filters from "../components/Filters/Filters";
-import { Loader } from "../components/UI/Loader/Loader";
 import CategoryProductsPageSkeleton from "./CategoryProductsPageSkeleton";
 
 const CategoryProductsPage = () => {

@@ -1,12 +1,12 @@
 import React from "react";
-import { Loader } from "../../UI/Loader/Loader";
+
 import styles from "./OrderDrawer.module.scss";
 
 const DrawerDeliveryInfo = ({ deliveryInfo, isLoading }) => {
   return (
     <div className={styles.delivery}>
       <h3 className={styles.delivery__title}>Информация о доставке</h3>
-      {isLoading && <Loader />}
+      {isLoading && <p>Загрузка...</p>}
       {deliveryInfo ? (
         <ul className={styles.delivery__list}>
           <li>

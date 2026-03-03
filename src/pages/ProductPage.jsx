@@ -4,18 +4,14 @@ import { useGetProductByIdQuery } from "../api/products";
 import ProductImages from "../components/Product/ProductImages/ProductImages";
 import ProductInfo from "../components/Product/ProductInfo/ProductInfo";
 import ProductAttributes from "../components/Product/ProductAttributes/ProductAttributes";
-import { Loader } from "../components/UI/Loader/Loader";
+import ProductPageSkeleton from "./ProductPageSkeleton";
 
 const ProductPage = () => {
   const { productId } = useParams();
   const { data: product, isLoading, error } = useGetProductByIdQuery(productId);
 
   if (isLoading)
-    return (
-      <div style={{ textAlign: "center" }}>
-        <Loader />
-      </div>
-    );
+    return <ProductPageSkeleton />;
   if (error || !product)
     return <div style={{ textAlign: "center" }}>Ошибка загрузки товара</div>;
 

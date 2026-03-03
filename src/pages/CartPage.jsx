@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import EmptyCart from "../components/Cart/EmptyCart/EmptyCart";
 import CardCart from "../components/Cart/CardCart/CardCart";
 import InfoCart from "../components/Cart/InfoCart/InfoCart";
-import { Loader } from "../components/UI/Loader/Loader";
+
 
 import {
   useGetCartContentsQuery,
@@ -66,8 +66,8 @@ const CartPage = () => {
 
   if (isLoading) {
     return (
-      <div style={{ textAlign: "center" }}>
-        <Loader />
+      <div style={{ textAlign: "center", padding: "40px" }}>
+        Загрузка...
       </div>
     );
   }

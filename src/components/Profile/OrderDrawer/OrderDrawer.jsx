@@ -6,7 +6,7 @@ import {
   useReorderMutation,
 } from "../../../api/orders";
 import styles from "./OrderDrawer.module.scss";
-import { Loader } from "../../UI/Loader/Loader";
+
 import DrawerDeliveryInfo from "./DrawerDeliveryInfo";
 
 const STATUS_STEPS = [

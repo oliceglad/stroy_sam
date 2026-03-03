@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import { useGetMeQuery, useLogoutUserMutation } from "../api/user";
 import { useGetUserOrdersQuery } from "../api/orders";
-import { Loader } from "../components/UI/Loader/Loader";
 import ProfileInfo from "../components/Profile/ProfileInfo/ProfileInfo";
 import OrderFilters from "../components/Profile/OrderFilters/OrderFilters";
 import OrderCard from "../components/Profile/OrderCard/OrderCard";

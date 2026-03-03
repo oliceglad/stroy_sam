@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSearchProductsQuery } from "../api/products";
 import ProductCard from "../components/ProductCard/ProductCard";
-import { Loader } from "../components/UI/Loader/Loader";
+import FavoritesPageSkeleton from "./FavoritesPageSkeleton";
 
 const SearchResultsPage = () => {
   const location = useLocation();
@@ -19,7 +19,7 @@ const SearchResultsPage = () => {
 
       {isLoading && (
         <div style={{ textAlign: "center" }}>
-          <Loader />
+          <FavoritesPageSkeleton />
         </div>
       )}
       {error && <p>Ошибка при поиске</p>}
