@@ -30,7 +30,7 @@ const Filters = ({
   return (
     <aside className={styles.filters}>
       {isLoading ? (
-        <Loader />
+        <></>
       ) : options?.length === 0 ? (
         <div className={styles.filters__empty}>Нет доступных фильтров</div>
       ) : (

@@ -9,6 +9,7 @@ import {
 } from "../../../api/cart";
 import { useGetMeQuery } from "../../../api/user";
 import CartControls from "../../UI/CartControls/CartControls";
+import FavoriteButton from "../../UI/FavoriteButton/FavoriteButton";
 
 const ProductInfo = ({ product }) => {
   if (!product) return null;
@@ -80,7 +81,10 @@ const ProductInfo = ({ product }) => {
   return (
     <div className={styles.info}>
       <div>
-        <h1 className={styles.info__title}>{product_name}</h1>
+        <div className={styles.info__titleContainer}>
+          <h1 className={styles.info__title}>{product_name}</h1>
+          <FavoriteButton product={product} />
+        </div>
         <p className={styles.info__desc}>{description}</p>
       </div>
       <div>

@@ -11,6 +11,7 @@ import {
 } from "../../api/cart";
 import { useGetMeQuery } from "../../api/user";
 import CartControls from "../UI/CartControls/CartControls";
+import FavoriteButton from "../UI/FavoriteButton/FavoriteButton";
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -106,6 +107,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <li className={styles.card} onClick={handleCardClick}>
+      <FavoriteButton product={product} className={styles.card__favorite} />
       <img src={imageUrl} alt={product.product_name} />
 
       <div className={styles.card__info}>

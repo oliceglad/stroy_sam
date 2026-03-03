@@ -5,6 +5,7 @@ import { productsApi } from "../api/products";
 import { userApi } from "../api/user";
 import { cartApi } from "../api/cart";
 import { ordersApi } from "../api/orders";
+import { favoritesApi } from "../api/favorites";
 
 export const store = configureStore({
   reducer: {
@@ -13,14 +14,19 @@ export const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
+    [favoritesApi.reducerPath]: favoritesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware()
+    getDefaultMiddleware({
+      serializableCheck: false,
+      immutableCheck: false,
+    })
       .concat(categoriesApi.middleware)
       .concat(userApi.middleware)
       .concat(productsApi.middleware)
       .concat(ordersApi.middleware)
-      .concat(cartApi.middleware),
+      .concat(cartApi.middleware)
+      .concat(favoritesApi.middleware),
 });
 
 setupListeners(store.dispatch);

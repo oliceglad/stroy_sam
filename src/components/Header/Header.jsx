@@ -8,16 +8,27 @@ import { User } from "../UI/User/User";
 import { Favorites } from "../UI/Favorites/Favorites";
 import { Cart } from "../UI/Cart/Cart";
 import { useGetCartContentsQuery } from "../../api/cart";
+import { useGetFavoritesContentsQuery } from "../../api/favorites";
 import { useGetMeQuery } from "../../api/user";
 
 const Header = () => {
   const { data: cartData, isSuccess: isCartSuccess } = useGetCartContentsQuery();
   const { data: userData, isSuccess: isUserSuccess } = useGetMeQuery();
+  const { data: favoritesData, isSuccess: isFavoritesSuccess } = useGetFavoritesContentsQuery(
+    undefined,
+    { skip: !userData || !isUserSuccess }
+  );
+
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const cartCount =
     cartData?.data != null && isCartSuccess
       ? cartData?.data.reduce((sum, item) => sum + item.quantity, 0)
+      : 0;
+
+  const favCount =
+    favoritesData != null && Array.isArray(favoritesData) && isFavoritesSuccess
+      ? favoritesData.length
       : 0;
 
   return (
@@ -49,7 +60,7 @@ const Header = () => {
           </button>
 
           <NavLink to="/favorites" className={s.header__link}>
-            <Favorites className={s.header__icon} />
+            <Favorites className={s.header__icon} count={favCount} />
           </NavLink>
 
           <NavLink to="/cart" className={s.header__link}>

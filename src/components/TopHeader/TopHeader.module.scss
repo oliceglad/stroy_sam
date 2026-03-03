@@ -17,6 +17,7 @@
         flex-direction: column;
         gap: 10px;
         text-align: center;
+        flex-wrap: wrap;
     }
   }
 
@@ -58,6 +59,8 @@
   &__right {
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
     position: relative;
   }

@@ -4,6 +4,13 @@
   flex-direction: column;
   gap: 16px;
 
+  &__titleContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+  }
+
   &__title {
     font-size: 24px;
     margin: 0;
