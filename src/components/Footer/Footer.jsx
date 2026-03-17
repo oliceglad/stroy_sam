@@ -11,7 +11,7 @@ const Footer = () => {
         <div className={s.footer__container}>
           {/* Column 1: Company Info */}
           <div className={s.footer__col}>
-            <h3 className={s.footer__logo} onClick={() => navigate("/")}>СтройСам</h3>
+            <h3 className={s.footer__logo} onClick={() => navigate("/")}>Мухачаки</h3>
             <p className={s.footer__desc}>
               Ваш надежный партнер в строительстве и ремонте. Широкий ассортимент товаров, быстрая доставка и качественный сервис.
             </p>
@@ -62,10 +62,10 @@ const Footer = () => {
       <div className={s.footer__bottom}>
         <div className={s.footer__container}>
           <div className={s.footer__copyright}>
-            © 2026 Магазин СтройСам. Все права защищены.
+            © 2026 Магазин Мухачаки. Все права защищены.
           </div>
           <div className={s.footer__info}>
-            Информация на сайте www.stroysam.ru не является публичной офертой. Указанные цены действуют только при оформлении заказа через интернет-магазин.
+            Информация на сайте www.muhachaki.ru не является публичной офертой. Указанные цены действуют только при оформлении заказа через интернет-магазин.
           </div>
         </div>
       </div>

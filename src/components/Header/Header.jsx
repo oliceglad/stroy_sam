@@ -36,7 +36,7 @@ const Header = () => {
       <div className={s.header__container}>
         <div className={s.header__left}>
           <NavLink to="/" className={s.header__logo}>
-            <h1 className={s.header__title}>СтройСам</h1>
+            <h1 className={s.header__title}>Мухачаки</h1>
           </NavLink>
         </div>
 
