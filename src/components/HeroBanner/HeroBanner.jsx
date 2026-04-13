@@ -4,8 +4,38 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import styles from "./HeroBanner.module.scss";
-import banner1 from "../../assets/images/images.jpeg";
+import slideTools from "../../assets/images/slide_tools.jpg";
+import slideMaterials from "../../assets/images/slide_materials.jpg";
+import slideLumber from "../../assets/images/slide_lumber.jpg";
+import slideCement from "../../assets/images/slide_cement.jpg";
 import { useNavigate } from "react-router-dom";
+
+const slides = [
+  {
+    image: slideTools,
+    title: "Инструменты и крепёж",
+    subtitle: "Всё для строительства и ремонта в одном месте",
+    btnText: "Перейти в каталог",
+  },
+  {
+    image: slideMaterials,
+    title: "Листовые материалы",
+    subtitle: "Профлист, поликарбонат, ОСБ и другие материалы",
+    btnText: "Смотреть ассортимент",
+  },
+  {
+    image: slideLumber,
+    title: "Пиломатериалы",
+    subtitle: "Брус, доска, вагонка — всегда в наличии",
+    btnText: "Подробнее",
+  },
+  {
+    image: slideCement,
+    title: "Сухие смеси и цемент",
+    subtitle: "Цемент, штукатурка, шпаклёвка, клей по выгодным ценам",
+    btnText: "Выбрать",
+  },
+];
 
 const HeroBanner = () => {
   const navigate = useNavigate();
@@ -29,40 +59,28 @@ const HeroBanner = () => {
         }}
         loop
       >
-        <SwiperSlide>
-          <div
-            className={styles.slide}
-            style={{ backgroundImage: `url(${banner1})` }}
-          >
-            <div className={styles.content}>
-              <h2>Скидка 30% на цемент и смеси</h2>
-              <p>Успей купить до конца месяца!</p>
-              <button
-                className={styles.btn}
-                onClick={() => navigate("/categories")}
-              >
-                Перейти в каталог
-              </button>
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div className={styles.slide}>
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className={styles.slide__img}
+              />
+              <div className={styles.slide__overlay} />
+              <div className={styles.content}>
+                <h2>{slide.title}</h2>
+                <p>{slide.subtitle}</p>
+                <button
+                  className={styles.btn}
+                  onClick={() => navigate("/categories")}
+                >
+                  {slide.btnText}
+                </button>
+              </div>
             </div>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div
-            className={styles.slide}
-            style={{ backgroundImage: `url(${banner1})` }}
-          >
-            <div className={styles.content}>
-              <h2>Бесплатная доставка от 10 000 ₽</h2>
-              <p>Привезём прямо на объект</p>
-              <button
-                className={styles.btn}
-                onClick={() => navigate("/categories")}
-              >
-                Подробнее
-              </button>
-            </div>
-          </div>
-        </SwiperSlide>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

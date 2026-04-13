@@ -1,20 +1,20 @@
 import React from "react";
 import styles from "./Partners.module.scss";
 
-import brand1 from "../../assets/brand_logo_1.png";
-import brand2 from "../../assets/brand_logo_2.png";
-import brand3 from "../../assets/brand_logo_3.png";
-import brand4 from "../../assets/brand_logo_4.png";
-import brand5 from "../../assets/brand_logo_5.png";
-import brand6 from "../../assets/brand_logo_6.png";
+import brand1 from "../../assets/images/partners/optimize.webp";
+import brand2 from "../../assets/images/partners/sibrtec-700x700.png";
+import brand3 from "../../assets/images/partners/orig.webp";
+import brand4 from "../../assets/images/partners/mceu_478907584131737100784838-1737100785910.png";
+import brand5 from "../../assets/images/partners/bioteks_1749216899.png";
+import brand6 from "../../assets/images/partners/DENZEL.png";
 
 const brands = [
-  { id: 1, name: "ProTool", logo: brand1 },
-  { id: 2, name: "BuildMaster", logo: brand2 },
-  { id: 3, name: "ColorFix", logo: brand3 },
-  { id: 4, name: "Constructo", logo: brand4 },
-  { id: 5, name: "AquaPipe", logo: brand5 },
-  { id: 6, name: "VoltTech", logo: brand6 },
+  { id: 1, name: "Optimize", logo: brand1 },
+  { id: 2, name: "Сибртех", logo: brand2 },
+  { id: 3, name: "Orig", logo: brand3 },
+  { id: 4, name: "Partner", logo: brand4 },
+  { id: 5, name: "Биотекс", logo: brand5 },
+  { id: 6, name: "Denzel", logo: brand6 },
 ];
 
 const Partners = () => {

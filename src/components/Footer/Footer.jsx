@@ -38,7 +38,8 @@ const Footer = () => {
           <div className={s.footer__col}>
             <h4 className={s.footer__heading}>Покупателям</h4>
             <ul className={s.footer__list}>
-              <li><NavLink to="/delivery">Доставка и оплата</NavLink></li>
+              <li><NavLink to="/delivery-info">Доставка и оплата</NavLink></li>
+              <li><NavLink to="/return-policy">Возврат товара</NavLink></li>
               <li><NavLink to="/contacts">Контакты</NavLink></li>
               <li><NavLink to="/about">О компании</NavLink></li>
               <li><NavLink to="/profile">Личный кабинет</NavLink></li>
@@ -50,6 +51,7 @@ const Footer = () => {
           <div className={s.footer__col}>
             <h4 className={s.footer__heading}>Документация</h4>
             <ul className={s.footer__list}>
+              <li><NavLink to="/personal-data-consent">Согласие на обработку данных</NavLink></li>
               <li><NavLink to="/data-policy">Политика конфиденциальности</NavLink></li>
               <li><NavLink to="/sales-rules">Правила продажи</NavLink></li>
               <li><NavLink to="/rec-tech-rules">Рекомендательные технологии</NavLink></li>

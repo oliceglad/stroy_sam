@@ -7,6 +7,8 @@ import TopHeader from "./components/TopHeader/TopHeader";
 import Footer from "./components/Footer/Footer";
 import CartPage from "./pages/CartPage";
 import DeliveryPage from "./pages/DeliveryPage";
+import DeliveryInfoPage from "./pages/DeliveryInfoPage";
+import PaymentPage from "./pages/PaymentPage";
 import SuccessPage from "./pages/SuccessPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import Breadcrumbs from "./components/Breadcrumbs/Breadcrumbs";
@@ -20,15 +22,22 @@ import SubCategoriesPage from "./pages/SubCategoriesPage";
 import AuthProvider from "./providers/AuthProvider";
 import FavoritesPage from "./pages/FavoritesPage";
 import ContactsPage from "./pages/ContactsPage";
+import AboutPage from "./pages/AboutPage";
 import DataPolicyPage from "./pages/documents/DataPolicyPage";
 import SalesRulesPage from "./pages/documents/SalesRulesPage";
 import RecTechRulesPage from "./pages/documents/RecTechRulesPage";
 import PublicOfferPage from "./pages/documents/PublicOfferPage";
+import CookiePolicyPage from "./pages/documents/CookiePolicyPage";
+import ReturnPolicyPage from "./pages/documents/ReturnPolicyPage";
+import PersonalDataConsentPage from "./pages/documents/PersonalDataConsentPage";
+import CookieConsent from "./components/CookieConsent/CookieConsent";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop />
         <AuthProvider>
           <TopHeader />
           <Header />
@@ -40,6 +49,8 @@ function App() {
               <Route path="*" element={<Navigate to="/fail" replace />} />
               <Route path="/cart" element={<CartPage />} />
               <Route path="/delivery" element={<DeliveryPage />} />
+              <Route path="/delivery-info" element={<DeliveryInfoPage />} />
+              <Route path="/payment" element={<PaymentPage />} />
               <Route path="/success" element={<SuccessPage />} />
               <Route path="/categories" element={<CategoriesPage />} />
               <Route
@@ -65,14 +76,19 @@ function App() {
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/favorites" element={<FavoritesPage />} />
               <Route path="/contacts" element={<ContactsPage />} />
+              <Route path="/about" element={<AboutPage />} />
               
               <Route path="/data-policy" element={<DataPolicyPage />} />
               <Route path="/sales-rules" element={<SalesRulesPage />} />
               <Route path="/rec-tech-rules" element={<RecTechRulesPage />} />
               <Route path="/public-offer" element={<PublicOfferPage />} />
+              <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+              <Route path="/return-policy" element={<ReturnPolicyPage />} />
+              <Route path="/personal-data-consent" element={<PersonalDataConsentPage />} />
             </Routes>
           </div>
           <Footer />
+          <CookieConsent />
         </AuthProvider>
       </BrowserRouter>
     </div>

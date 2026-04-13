@@ -13,24 +13,63 @@
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 800px) {
+    @media (max-width: 1024px) {
+      gap: 15px;
+    }
+
+    @media (max-width: 850px) {
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
         text-align: center;
-        flex-wrap: wrap;
+        padding: 10px 20px;
     }
   }
 
   &__left {
     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+    @media (max-width: 850px) {
+        align-items: center;
+        gap: 6px;
+    }
+  }
+
+  &__subnav {
+    display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    @media (max-width: 850px) {
+        justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+        gap: 10px;
+    }
+  }
+
+  &__subLink {
+    text-decoration: none;
+    color: #555;
+    font-weight: 500;
+    font-size: 13px;
+    transition: color 0.2s;
+
+    &:hover {
+        color: #007bff;
+        text-decoration: underline;
+    }
   }
 
   &__link {
     text-decoration: none;
     color: #1C1B1B;
     font-weight: 600;
+    transition: color 0.2s;
 
     &:hover {
         color: #007bff;
@@ -51,8 +90,13 @@
     white-space: nowrap;
 
     &:hover {
-        background-color: #e5ac00; // Slightly darker on hover
+        background-color: #e5ac00;
         color: #1C1B1B;
+    }
+
+    @media (max-width: 480px) {
+        padding: 5px 10px;
+        font-size: 12px;
     }
   }
 
@@ -63,6 +107,15 @@
     flex-wrap: wrap;
     gap: 20px;
     position: relative;
+
+    @media (max-width: 850px) {
+        gap: 15px;
+    }
+
+    @media (max-width: 480px) {
+        gap: 10px;
+        font-size: 13px;
+    }
   }
 
   &__address {
@@ -70,6 +123,15 @@
     text-decoration: none;
     color: inherit;
     transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+
+    &::before {
+      content: '📍';
+      font-size: 12px;
+    }
 
     &:hover {
         opacity: 1;
@@ -79,6 +141,7 @@
 
   &__schedule {
     opacity: 0.8;
+    white-space: nowrap;
   }
 
   &__phoneWrapper {
@@ -99,6 +162,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    white-space: nowrap;
 
     &:hover {
         text-decoration: underline;
@@ -118,10 +182,19 @@
     min-width: 150px;
     margin-top: 5px;
 
-    // Animation
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.2s, transform 0.2s;
+
+    @media (max-width: 850px) {
+      right: auto;
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      
+      &:hover {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
   }
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./InfoCart.module.scss";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 
 
 const InfoCart = ({
@@ -18,8 +19,15 @@ const InfoCart = ({
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [showConsentError, setShowConsentError] = useState(false);
+
   const handleGoButton = () => {
     if (location.pathname === "/delivery") {
+      if (!consentChecked) {
+        setShowConsentError(true);
+        return;
+      }
       onCreateOrder();
     } else {
       goToDelivery();
@@ -39,6 +47,27 @@ const InfoCart = ({
         <span>Итого к оплате:</span>
         <span>{totalPrice}₽</span>
       </div>
+
+      {location.pathname === "/delivery" && (
+        <div style={{marginTop: '20px', marginBottom: '10px'}}>
+          <label style={{display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '12px', lineHeight: '1.4', cursor: 'pointer', textAlign: 'left'}}>
+            <input 
+              type="checkbox" 
+              checked={consentChecked} 
+              onChange={(e) => {
+                setConsentChecked(e.target.checked);
+                setShowConsentError(false);
+              }} 
+              style={{marginTop: '2px'}}
+            />
+            <span style={{color: '#555'}}>
+              Я даю <Link to="/personal-data-consent" style={{color: '#007bff', textDecoration: 'underline'}}>согласие на обработку персональных данных</Link> и подтверждаю ознакомление с <Link to="/data-policy" style={{color: '#007bff', textDecoration: 'underline'}}>Политикой обработки персональных данных</Link>
+            </span>
+          </label>
+          {showConsentError && <div style={{color: 'red', fontSize: '12px', marginTop: '5px', textAlign: 'left'}}>Необходимо подтвердить согласие с Политикой</div>}
+        </div>
+      )}
+
       <div className={styles.infoCart__buttons}>
         <button
           className={styles["infoCart__checkoutButton"]}

@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./ContactsPage.module.scss";
+import maxLogo from "../assets/max_logo.png";
 // Using the generated image path - normally we would move this to assets, but for now I'll reference the artifact or a placeholder. 
 // Since I can't easily move the artifact to src/assets in this environment without multiple steps, I will use a local variable for the image path if I can, OR just use a placeholder text/style content.
 // WAIT - I can only use files in the src directory for the build.
@@ -31,7 +32,10 @@ const ContactsPage = () => {
                 <h3>Мы в соцсетях</h3>
                 <div className={s.contacts__socials}>
                     <a href="#" className={s.contacts__socialLink}>Telegram</a>
-                    <a href="#" className={s.contacts__socialLink}>WhatsApp</a>
+                    <a href="#" className={s.contacts__socialLink}>
+                        <img src={maxLogo} alt="Max" style={{ width: '20px', height: '20px', marginRight: '8px', verticalAlign: 'middle', borderRadius: '4px' }} />
+                        Max
+                    </a>
                 </div>
             </div>
         </div>

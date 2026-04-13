@@ -4,19 +4,15 @@ export const Favorites = ({ className, count = 0 }) => {
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
       <svg
-        width="48"
-        height="48"
-        viewBox="0 0 48 48"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={className}
       >
         <path
-          d="M0 10C0 4.47715 4.47715 0 10 0H38C43.5228 0 48 4.47715 48 10V38C48 43.5228 43.5228 48 38 48H10C4.47715 48 0 43.5228 0 38V10Z"
-          fill="#F3F9FB"
-        />
-        <path
-          d="M31.2 16.51C30.7328 15.9926 30.1578 15.5786 29.5137 15.2959C28.8697 15.0132 28.1714 14.8683 27.4682 14.8711C26.7441 14.8711 26.027 15.0232 25.3582 15.3195C24.6893 15.6158 24.0805 16.0514 23.5627 16.6045C23.0449 16.0514 22.4361 15.6158 21.7672 15.3195C21.0984 15.0232 20.3813 14.8711 19.6572 14.8711C18.954 14.8683 18.2558 15.0132 17.6117 15.2959C16.9676 15.5786 16.3926 15.9926 15.9254 16.51C14.0041 18.6364 14.1613 21.9964 16.3272 23.9518L23.5627 30.4827L30.7981 23.9518C32.964 21.9964 33.1213 18.6364 31.2 16.51Z"
+          d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.501 5.501 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"
           stroke="#1C1B1B"
           strokeWidth="2"
           strokeLinecap="round"
@@ -25,19 +21,19 @@ export const Favorites = ({ className, count = 0 }) => {
       </svg>
       {count > 0 && (
         <svg
-          style={{ position: "absolute", top: 0, right: -4 }}
-          width="19"
-          height="19"
+          style={{ position: "absolute", top: -6, right: -8 }}
+          width="18"
+          height="18"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <rect
-            x="2.5"
-            y="2.5"
-            width="19"
-            height="19"
-            rx="9.5"
+            x="2"
+            y="2"
+            width="20"
+            height="20"
+            rx="10"
             fill="#FB4E4E"
           />
           <text
@@ -45,7 +41,7 @@ export const Favorites = ({ className, count = 0 }) => {
             y="13"
             textAnchor="middle"
             dominantBaseline="middle"
-            fontSize="10"
+            fontSize="11"
             fontWeight="bold"
             fill="white"
           >

@@ -21,6 +21,8 @@ const RegisterPage = () => {
 
   const [isVerificationOpen, setIsVerificationOpen] = useState(false);
   const [phoneForVerification, setPhoneForVerification] = useState("");
+  const [consentChecked, setConsentChecked] = useState(false);
+  const [showConsentError, setShowConsentError] = useState(false);
 
   const handleChange = (field) => (e) => {
     setForm((prev) => ({
@@ -37,6 +39,10 @@ const RegisterPage = () => {
   };
 
   const handleSubmit = async () => {
+    if (!consentChecked) {
+      setShowConsentError(true);
+      return;
+    }
     const purePhone = cleanPhone(form.phone);
     try {
       await register({
@@ -93,7 +99,26 @@ const RegisterPage = () => {
         maskType="email"
         style={{ marginBottom: "20px" }}
       />
-      <Button onClick={handleSubmit}>Зарегистрироваться</Button>
+      
+      <div className="auth__consent">
+        <label className="auth__consentLabel" style={{display: 'flex', gap: '8px', alignItems: 'flex-start', fontSize: '13px', lineHeight: '1.4', cursor: 'pointer', textAlign: 'left'}}>
+          <input 
+            type="checkbox" 
+            checked={consentChecked} 
+            onChange={(e) => {
+              setConsentChecked(e.target.checked);
+              setShowConsentError(false);
+            }} 
+            style={{marginTop: '2px'}}
+          />
+          <span style={{color: '#555'}}>
+            Я даю <Link to="/personal-data-consent" style={{color: '#007bff', textDecoration: 'underline'}}>согласие на обработку персональных данных</Link> и подтверждаю ознакомление с <Link to="/data-policy" style={{color: '#007bff', textDecoration: 'underline'}}>Политикой обработки персональных данных</Link>
+          </span>
+        </label>
+        {showConsentError && <div className="auth__consentError" style={{color: 'red', fontSize: '13px', marginTop: '5px', textAlign: 'left'}}>Необходимо подтвердить согласие с Политикой</div>}
+      </div>
+
+      <Button onClick={handleSubmit} style={{ marginTop: "15px" }}>Зарегистрироваться</Button>
 
       <Link to="/login" className="auth__link">
         Уже есть аккаунт? Войти

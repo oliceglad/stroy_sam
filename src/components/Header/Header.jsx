@@ -52,6 +52,10 @@ const Header = () => {
         </div>
 
         <div className={s.header__right}>
+          <NavLink to="/categories" className={s.header__mobileCatalog}>
+            <Catalog className={s.header__icon} />
+          </NavLink>
+
           <button
             className={s.header__searchBtn}
             onClick={() => setMobileSearchOpen((prev) => !prev)}
