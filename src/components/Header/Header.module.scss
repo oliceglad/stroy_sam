@@ -26,6 +26,11 @@
     align-items: center;
   }
 
+  &__logo img {
+    width: 100px;
+    height: 60px;
+  }
+
   &__link {
     display: inline-flex;
     align-items: center;
@@ -39,13 +44,13 @@
   &__loginBtn {
     padding: 8px 16px;
     font-weight: 600;
-    color: #1C1B1B;
+    color: #1c1b1b;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 40px;
     box-sizing: border-box;
-    
+
     &:hover {
       background-color: #e6f2f5;
     }
@@ -97,7 +102,7 @@
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    color: #1C1B1B;
+    color: #1c1b1b;
     font-weight: 600;
     margin-right: 15px;
     height: 40px; // Reduced height
@@ -105,10 +110,10 @@
     transition: background-color 0.2s;
 
     &:hover {
-        background-color: #e5ac00;
+      background-color: #e5ac00;
     }
   }
-  
+
   &__catalogIcon {
     width: 20px;
     height: 20px;

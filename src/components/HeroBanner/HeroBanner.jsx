@@ -4,10 +4,10 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import styles from "./HeroBanner.module.scss";
-import slideTools from "../../assets/images/slide_tools.jpg";
-import slideMaterials from "../../assets/images/slide_materials.jpg";
-import slideLumber from "../../assets/images/slide_lumber.jpg";
-import slideCement from "../../assets/images/slide_cement.jpg";
+import slideTools from "../../assets/images/slide_tools_v2.png";
+import slideMaterials from "../../assets/images/slide_materials_v2.png";
+import slideLumber from "../../assets/images/slide_lumber_v2.png";
+import slideCement from "../../assets/images/slide_cement_v2.png";
 import { useNavigate } from "react-router-dom";
 
 const slides = [
@@ -62,6 +62,11 @@ const HeroBanner = () => {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className={styles.slide}>
+              <img
+                src={slide.image}
+                alt=""
+                className={styles.slide__bg}
+              />
               <img
                 src={slide.image}
                 alt={slide.title}

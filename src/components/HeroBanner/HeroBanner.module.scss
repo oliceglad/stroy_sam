@@ -8,26 +8,38 @@
 .slide {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 500px;
   overflow: hidden;
   border-radius: 12px;
+  background-color: #000;
 
   @media (max-width: 768px) {
-    height: 320px;
+    height: 400px;
   }
 
   @media (max-width: 480px) {
-    height: 260px;
+    height: 300px;
   }
 
-  &__img {
+  &__bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    filter: blur(20px) brightness(0.7);
+    transform: scale(1.1);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  &__img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
 
@@ -43,13 +55,13 @@
       rgba(0, 0, 0, 0.25) 40%,
       rgba(0, 0, 0, 0.05) 100%
     );
-    z-index: 1;
+    z-index: 2;
   }
 }
 
 .content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   max-width: 460px;
   color: #fff;
   padding: 28px 30px;

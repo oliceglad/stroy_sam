@@ -11,6 +11,8 @@ import { useGetCartContentsQuery } from "../../api/cart";
 import { useGetFavoritesContentsQuery } from "../../api/favorites";
 import { useGetMeQuery } from "../../api/user";
 
+import logo from "../../assets/images/logo.svg"
+
 const Header = () => {
   const { data: cartData, isSuccess: isCartSuccess } = useGetCartContentsQuery();
   const { data: userData, isSuccess: isUserSuccess } = useGetMeQuery();
@@ -36,7 +38,7 @@ const Header = () => {
       <div className={s.header__container}>
         <div className={s.header__left}>
           <NavLink to="/" className={s.header__logo}>
-            <h1 className={s.header__title}>Мухачаки</h1>
+            <img src={logo} alt="logo" />
           </NavLink>
         </div>
 
